@@ -17,9 +17,10 @@ app.use(cors());
 // Add a JSON-parser, as any incoming data should be json
 app.use(express.json({strict: false}));
 
+/*
 app.use('/api', api);
 app.use('/admin', adminApi);
-
+*/
 /*
  * Setup index page
  * Right now, 'empty' page
@@ -44,9 +45,11 @@ app.post('/', (req, res) => {
  * Setup mongoose and start server if everything went well
  */
 mongoose.connect(dbConfig.database, dbConfig.opts, (err) => {
-	console.error('Mongoose unable to connect!');
-	console.error(err);
-	process.exit(1);
+	if (err) {
+		console.error('Mongoose unable to connect!');
+		console.error(err);
+		process.exit(1);
+	}
 });
 
 const server = app.listen(port, () => {
