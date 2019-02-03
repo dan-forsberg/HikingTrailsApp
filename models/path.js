@@ -7,7 +7,7 @@ const pathSchema = mongoose.Schema({
 	info: { type: String, required: true },
 	length: { type: String, required: true },
 	duration: { type: Number, required: true },
-	places: [Number],
+	places: [String],
 	/* no polyline, this is instead found in places.position the one source of truth */
 });
 
