@@ -37,7 +37,7 @@ To delete a bundle/path/place DELETE to ~/api/admin/[bundle,path,place]/id~.
 
 **** Response
 If any operation fails, something like ~{ success: false, message: 'Operation x failed.' }~ will be sent along with error-code 500/internal error.
-If the operation succeeds then the data will be returned along with code 200/OK.
+If the operation succeeds then the data will be returned along with code 200/OK. In case a request element is not found, an empty set is returned.
 
 **** Bundle
 
