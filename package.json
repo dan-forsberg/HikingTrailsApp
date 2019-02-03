@@ -1,0 +1,24 @@
+{
+  "name": "hikingtrailsapp",
+  "version": "1.0.0",
+  "description": "Full stack developer test",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha tests/*.specs.js --exit"
+  },
+  "dependencies": {
+	"cors": "~2.8.5",
+    "express": "~4.16.4",
+    "mongoose": "~5.4.8"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
