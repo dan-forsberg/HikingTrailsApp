@@ -1,0 +1,13 @@
+{
+	"extends": ["airbnb"],
+	"rules": {
+		"prefer-destructuring": 0,
+		"indent": ["error", "tab"],
+		"no-tabs": 0,
+		"no-undef": 0,
+		"nonblock-statement-body-position": ["error", "below"],
+		"func-names": 0,
+		"no-console": 0,
+		"curly": 2
+	}
+}
