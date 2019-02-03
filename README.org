@@ -1,0 +1,89 @@
+* The stack design
+This project uses a MEAN stack. For the database it uses MongoDB, Node with Express for HTTP, and Angular for the front-end.
+
+I had considered using other solutions, like a more "traditional" LAMP-stack. But I quickly decided on MEAN. The whole stack uses the same language, JavaScript, or a superset of it. The stack's components has more-or-less been built with a nice object-oriented and stable easy-to-use and easy-to-understand style. None of the stack's components are new, so I can safely assume that I won't run into any bugs or features which are lacking. The whole application is based on data, which is something Node excels at and Angular is made for. This strengthen my decision for Node and Angular.
+
+** The back-end/API implementation
+*** Requirements
+- The API should be stateless and use the CRUD-design.
+- The back-end/API should work with the regular HTTP/verb requests.
+- A user should be able to get a bundle and more specific info about each path/place.
+- An admin should be able to administrate (CrUD) bundles, paths, and places.
+
+*** Exposed API description
+
+The API will be exposed at ~/api~ which will be for regular users to GET data.
+The admin API will be exposed at ~/api/admin~ for admins to GET, POST, PUT, or DELETE data.
+
+| Operation | endpoint | parameters              | Example            |
+|-----------+----------+-------------------------+--------------------|
+| GET       | /api     | [path:id] or [place:id] | GET \/api\/path\/2 |
+| POST      | /api     | none                    | Not supported.     |
+| PUT       | /api     | none                    | Not supported.     |
+| DELETE    | /api     | none                    | Not supported.     |
+
+| Operation | endpoint   | parameters                                 | Example               							    |
+|-----------+------------+--------------------------------------------+-----------------------------------------------------|
+| GET       | /api/admin | [path:id] or [place:id]                    | GET \/api\/path\/2                                  |
+| POST      | /api/admin | New path/place                             | POST \/api\/admin\/place, { name: 'Place..', ... }  |
+| PUT       | /api/admin | [path:id] and updated parameters in object | PUT \/api\/admin\/path\/5, { name: 'Updated name' } |
+| DELETE    | /api/admin | none                                       | DELETE \/api\/admin\/bundle\/3                      |
+
+The admin API takes incoming requests with ~application/json~ and any data should be JSON.
+
+To create a bundle/path/place POST to ~/api/admin/[bundle,path,place]~ with required parameters.
+To update a bundle/path/place PUT to ~/api/admin/[bundle,path,place]/id~ with updated parameters.
+To delete a bundle/path/place DELETE to ~/api/admin/[bundle,path,place]/id~.
+
+**** Response
+If any operation fails, something like ~{ success: false, message: 'Operation x failed.' }~ will be sent along with error-code 500/internal error.
+If the operation succeeds then the data will be returned along with code 200/OK.
+
+**** Bundle
+
+| Object                  | Description                              |
+|-------------------------+------------------------------------------|
+| name ~(string)~         | Name of the bundle                       |
+| image ~(string)~        | URL to image describing the bundle.      |
+| info ~(info)~           | A short descriptive text for the bundle. |
+| paths ~(array, number)~ | Array of path IDs in the bundle.         |
+
+**** Path
+
+| Object                   | Description                        |
+|--------------------------+------------------------------------|
+| places ~(array, number)~ | Array of place IDs in the path.    |
+| name ~(string)~          | Name the path.                     |
+| info ~(string)~          | Description of the path            |
+| length ~(string)~        | Length in km.                      |
+| duration ~(number)~      | Path hiking time in hours.         |
+| image ~(image)~          | URL to image describing the trail. |
+
+
+**** Place
+| Object                           | Description                        |
+|----------------------------------+------------------------------------|
+| name ~(string)~                  | Place name.                        |
+| info ~(string)~                  | Place description.                 |
+| image ~(string)~                 | URL to image of place.             |
+| radius ~(number)~                | Radius is the place marker.        |
+| position ~(object, two numbers)~ | Object with lng and lat.           |
+| media ~(array)~                  | Array of additional media objects. |
+
+*** Internal API design
+The whole API will follow an MVC-pattern. The model will handle any communication to the database, and do some rudamentary error-checking. It will not make use of callbacks to Mongoose, but return promises. This is to be able to ensure that things are done in correct order.
+
+The controller will take JSON data in case of CrUD and send it to the model, if in production the controller will give a non-descriptive 'An error occured' message to the view. If in testing, it will give the whole error.
+
+* Dependecies
+The app uses express for the actual HTTP server to make handling requests, parsing requests, and routing simpler.
+Express is also a well-known and well-tested library.
+
+The app also uses the Express middleware CORS to enable cross-origin requests.
+
+The app uses Mongoose the library to communicate with MongoDB. This decision was made because mongoose is also well-known and well-tested. It also very conveniently abstracts everything for easy and fast development.
+
+** Dev dependecies
+The testing network used is Mocha with chai and its middleware chai-http.
+
+The rest of the dev-deps are just to enforce proper code style rules for nice readable code.
