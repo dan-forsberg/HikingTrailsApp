@@ -3,9 +3,13 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const dbConfig = require('./config/database');
+
 const api = require('./controllers/api');
 const adminApi = require('./controllers/admin-api');
-const dbConfig = require('./config/database');
+const adminBundle = require('./controllers/admin-bundle');
+const adminPath = require('./controllers/admin-path');
+const adminPlace = require('./controllers/admin-place');
 
 /*
  * Setup express
@@ -25,10 +29,9 @@ app.use('/api/path', api);
 app.use('/api/place', api);
 
 app.use('/admin', adminApi);
-app.use('/admin/bundle', adminApi);
-app.use('/admin/path', adminApi);
-app.use('/admin/place', adminApi);
-
+app.use('/admin/bundle', adminBundle);
+app.use('/admin/path', adminPath);
+app.use('/admin/place', adminPlace);
 
 /*
  * Setup index page

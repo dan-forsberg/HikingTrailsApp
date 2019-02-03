@@ -21,7 +21,7 @@ function showError(origin, err, res) {
 
 /* When sending an empty GET, just show all bundles
  * To get more details, send the relevant request. */
-router.get('/', (req,res) => {
+router.get('/', (req, res) => {
 	bundle.getAllBundles()
 		.then((buns) => {
 			if (buns)

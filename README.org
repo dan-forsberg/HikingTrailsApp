@@ -75,6 +75,25 @@ The whole API will follow an MVC-pattern. The model will handle any communicatio
 
 The controller will take JSON data in case of CrUD and send it to the model, if in production the controller will give a non-descriptive 'An error occured' message to the view. If in testing, it will give the whole error.
 
+*** Testing
+For the models I have written unit tests - for the controllers I have decided to manually test them to save some time as it took some time to get the first tests to actually work. Testing manually also gives me some flexability and allows me to discover small errors earlier on. These manual tests have mostly been done with Postman.
+
+The tests for the models test each operation in CRUD. It makes sure you
+- can create a proper element (all required fields are included)
+- cannot create a improper element
+- cannot create a null
+
+- can find all elements
+- can find a specific element using ID
+- cannot find an element which does not exist
+
+- can update an element using proper data (number can't be NaN)
+- cannot update an element using improper data
+- cannot update a non-existent element
+
+- can delete an element
+- cannot delete an element which does not exist
+
 * Dependecies
 The app uses express for the actual HTTP server to make handling requests, parsing requests, and routing simpler.
 Express is also a well-known and well-tested library.
