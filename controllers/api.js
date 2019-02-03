@@ -8,10 +8,14 @@ const place = require('../models/place');
 
 /* TODO: implement a better error handler... */
 function showError(origin, err, res) {
+	let msg = `[${origin}] got error\n${err}`;
+	res.status(500);
+
 	if (process.env.NODE_ENV === 'test') {
-		res.send(`[${origin}] got error\n${err}`);
+		res.send(msg);
 	} else {
 		res.send({ success: false });
+		console.error(msg);
 	}
 }
 
