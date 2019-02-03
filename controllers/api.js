@@ -20,10 +20,39 @@ function showError(origin, err, res) {
 router.get('/', (req,res) => {
 	bundle.getAllBundles()
 		.then((buns) => {
-			res.send(buns);
+			if (buns)
+				res.send(buns);
+			else
+				res.send({});
 		})
 		.catch((err) => {
 			showError('getAllBundles', err, res);
+		});
+});
+
+router.get('/path/:id', (req, res) => {
+	path.getPath(req.params.id)
+		.then((pa) => {
+			if (pa)
+				res.send(pa);
+			else
+				res.send({});
+		})
+		.catch((err) => {
+			showError(`getPath with ID: ${req.params.id}`, err, res);
+		});
+});
+
+router.get('/place/:id', (req, res) => {
+	place.getPlace(req.params.id)
+		.then((pl) => {
+			if (pl)
+				res.send(pl);
+			else
+				res.send({});
+		})
+		.catch((err) => {
+			showError(`getPath with ID: ${req.params.id}`, err, res);
 		});
 });
 
