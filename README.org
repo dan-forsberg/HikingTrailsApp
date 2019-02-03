@@ -22,12 +22,12 @@ The admin API will be exposed at ~/api/admin~ for admins to GET, POST, PUT, or D
 | PUT       | /api     | none                    | Not supported.     |
 | DELETE    | /api     | none                    | Not supported.     |
 
-| Operation | endpoint   | parameters                                 | Example               							    |
-|-----------+------------+--------------------------------------------+-----------------------------------------------------|
-| GET       | /api/admin | [path:id] or [place:id]                    | GET \/api\/path\/2                                  |
-| POST      | /api/admin | New path/place                             | POST \/api\/admin\/place, { name: 'Place..', ... }  |
-| PUT       | /api/admin | [path:id] and updated parameters in object | PUT \/api\/admin\/path\/5, { name: 'Updated name' } |
-| DELETE    | /api/admin | none                                       | DELETE \/api\/admin\/bundle\/3                      |
+| Operation | endpoint   | parameters                                 | Returns                  | Example                                             |
+|-----------+------------+--------------------------------------------+--------------------------+-----------------------------------------------------|
+| GET       | /api/admin | none                                       | error                    |                                                     |
+| POST      | /api/admin | { 'newPath': {'name': '...'}}              | The new object           | POST \/api\/admin\/place, { name: 'Place..', ... }  |
+| PUT       | /api/admin | [path:id] and updated parameters in object | The updated object       | PUT \/api\/admin\/path\/5, { name: 'Updated name' } |
+| DELETE    | /api/admin | none                                       | { succeeded: true/false} | DELETE \/api\/admin\/bundle\/3                      |
 
 The admin API takes incoming requests with ~application/json~ and any data should be JSON.
 
