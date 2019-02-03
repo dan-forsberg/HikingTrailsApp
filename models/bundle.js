@@ -6,7 +6,7 @@ const bundleSchema = mongoose.Schema({
 	image: String,
 	info: { type: String, required: true },
 	paths: [Number],
-});
+},  { versionKey: false });
 
 const Bundle = mongoose.model('Bundle', bundleSchema);
 

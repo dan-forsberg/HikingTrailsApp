@@ -9,7 +9,7 @@ const pathSchema = mongoose.Schema({
 	duration: { type: Number, required: true },
 	places: [String],
 	/* no polyline, this is instead found in places.position the one source of truth */
-});
+},  { versionKey: false });
 
 const Path = mongoose.model('Path', pathSchema);
 
