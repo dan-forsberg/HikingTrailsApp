@@ -104,6 +104,7 @@ function addBundles() {
 		name: "The northern circuit",
 		info: "This circuit paths take you along a set of Northern scenic views.",
 		image: "http://assets.example.com/bundle-1234567890.jpg",
+		paths: [1234567890, 1234567890]
 	})];
 
 	for (let i = 0; i < buns.length; i++) {
