@@ -17,10 +17,9 @@ app.use(cors());
 // Add a JSON-parser, as any incoming data should be json
 app.use(express.json({strict: false}));
 
-/*
 app.use('/api', api);
 app.use('/admin', adminApi);
-*/
+
 /*
  * Setup index page
  * Right now, 'empty' page
