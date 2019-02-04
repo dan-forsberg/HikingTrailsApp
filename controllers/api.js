@@ -1,22 +1,29 @@
-process.env.NODE_ENV = 'test';
-
 const express = require('express');
 const router = express.Router();
 const bundle = require('../models/bundle');
 const path = require('../models/path');
 const place = require('../models/place');
 
-/* TODO: implement a better error handler... */
-function showError(origin, err, res) {
-	let msg = `[${origin}] got error\n${err}`;
-	res.status(500);
-
-	if (process.env.NODE_ENV === 'test') {
-		res.send(msg);
-	} else {
-		res.send({ success: false });
-		console.error(msg);
+/*
+ * Take an array of places, return $places.positions
+ */
+async function getPolyline(places) {
+	let polyline = [];
+	for (let i = 0; i < places.length; i++) {
+		// place IDs will be in places
+		// retrieve each place, store its .position into polyline
+		// return it
+		// this is *NOT* perfect or efficient
+		await place.getPlace(places[i])
+			.then((pl) => {
+				console.log("Got pl: " + pl.position);
+				polyline.push(pl.position);
+			})
+			.catch((err) => {
+				console.error(err);
+			});
 	}
+	return polyline;
 }
 
 /* When sending an empty GET, just show all bundles
@@ -24,26 +31,47 @@ function showError(origin, err, res) {
 router.get('/', (req, res) => {
 	bundle.getAllBundles()
 		.then((buns) => {
-			if (buns)
-				res.send(buns);
-			else
-				res.send({});
+			res.send(buns);
 		})
 		.catch((err) => {
-			showError('getAllBundles', err, res);
+			console.error(err);
+		});
+});
+
+router.get('/path', (req, res) => {
+	path.getAllPaths()
+		.then((pa) => {
+			res.send(pa);
+		})
+		.catch((err) => {
+			console.error(err);
+		});
+});
+
+router.get('/place', (req, res) => {
+	place.getAllPlaces()
+		.then((pl) => {
+			res.send(pl);
+		})
+		.catch((err) => {
+			console.err(err);
 		});
 });
 
 router.get('/path/:id', (req, res) => {
 	path.getPath(req.params.id)
 		.then((pa) => {
-			if (pa)
-				res.send(pa);
-			else
+			/* defensive programming */
+			if (!pa)
 				res.send({});
+
+			getPolyline(pa.places).then((polyline) => {
+				pa.set({'polyline': polyline})
+				res.send(pa);
+			});
 		})
 		.catch((err) => {
-			showError(`getPath with ID: ${req.params.id}`, err, res);
+			console.error(err);
 		});
 });
 
@@ -56,7 +84,7 @@ router.get('/place/:id', (req, res) => {
 				res.send({});
 		})
 		.catch((err) => {
-			showError(`getPath with ID: ${req.params.id}`, err, res);
+			console.error(err);
 		});
 });
 
