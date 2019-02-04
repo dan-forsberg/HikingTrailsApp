@@ -24,13 +24,39 @@ router.post('/', (req, res) => {
 	place.addPlace(newPlace).then((pl) => {
 		res.send(pl)
 	})
-
 	.catch((err) => {
 		res.status(500);
 		res.send("Internal error.");
 		console.error(err);
 	});
+});
 
+router.put('/:id', (req, res) => {
+	const reqId = req.params.id;
+	const reqUpdates = req.body.updates;
+
+	place.updatePlace(reqId, reqUpdates)
+		.then((updatedPlace) => {
+			res.send(updatedPlace);
+		})
+		.catch((err) => {
+			res.status(500);
+			res.send("Internal error.");
+			console.error(err);
+		});
+});
+
+router.delete('/:id', (req, res) => {
+	const reqId = req.params.id;
+
+	place.deletePlace(reqId)
+		.then(() => {
+			res.send({});
+		})
+		.err((err) => {
+			res.status(500);
+			res.send("Internal error");
+		});
 });
 
 module.exports = router;
