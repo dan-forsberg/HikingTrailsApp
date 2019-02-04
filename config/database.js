@@ -1,9 +1,5 @@
 /* Configuration details to connect to MongoDB */
 let database = 'hikingtrails';
-if (process.env.NODE_ENV === 'test') {
-	database += '-test'
-}
-
 let host = 'localhost';
 let port = 27017;
 
