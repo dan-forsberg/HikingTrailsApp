@@ -8,7 +8,7 @@ const pathSchema = mongoose.Schema({
 	length: { type: String, required: true },
 	duration: { type: Number, required: true },
 	places: [String],
-	/* no polyline, this is instead found in places.position the one source of truth */
+	polyline: [ mongoose.Mixed ]
 },  { versionKey: false });
 
 const Path = mongoose.model('Path', pathSchema);
@@ -46,5 +46,5 @@ const deletePath = (id) => {
 };
 
 module.exports = {
-	Path, getPath, getAllPaths, updatePath, deletePath, addPath,
+	Path, getPath, getAllPaths, updatePath, deletePath, addPath
 };
