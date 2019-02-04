@@ -27,7 +27,7 @@ describe("The Path Model's", () => {
 				_id: id,
 				length: 42,
 				duration: 5,
-				places: [1, 2, 3],
+				places: ['5c5872d5b481267d3dffa6f3', '5c5872d5b481267d3dffa6f4'],
 			});
 
 			path.addPath(newPath)
@@ -63,7 +63,11 @@ describe("The Path Model's", () => {
 
 	describe('read operations', () => {
 		it('should be able to find all Paths', (done) => {
-			path.getAllPaths().then(done());
+			path.getAllPaths()
+				.then(() => done())
+				.catch((err) => {
+					console.error(err);
+				});
 		});
 
 		it('should be able to find a Path', (done) => {
