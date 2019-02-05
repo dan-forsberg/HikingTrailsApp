@@ -1,5 +1,5 @@
 export interface Bundle {
-  _id?: number;
+  id?: number;
   name: string;
   image?: string;
   info: string;
