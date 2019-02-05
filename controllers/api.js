@@ -38,6 +38,16 @@ router.get('/', (req, res) => {
 		});
 });
 
+router.get('/bundle/:id', (req, res) => {
+	bundle.getBundle(req.params.id)
+		.then((bun) => {
+			res.send(bun);
+		})
+		.catch((err) => {
+			console.err(err);
+		});
+});
+
 router.get('/path', (req, res) => {
 	path.getAllPaths()
 		.then((pa) => {
