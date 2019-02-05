@@ -23,7 +23,7 @@ export class ViewBundleComponent implements OnInit {
   }
 
   deleteBundle(bundle: Bundle) {
-    this.bundleServ.deleteBundle(bundle.id).subscribe(
+    this.bundleServ.deleteBundle(bundle).subscribe(
       resp => this.bundles = this.bundles
         .filter(bundles =>
           bundles !== bundle

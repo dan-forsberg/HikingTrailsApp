@@ -1,3 +1,7 @@
-<p>
-  view-bundle works!
-</p>
+<h2>HikingTrails - Bundles</h2>
+<div class="bundle" *ngFor="let bundle of bundles">
+  <h3>{{bundle.name}}</h3>
+  <p>{{bundle.info}}</p>
+</div>
+
+<app-add-bundle></app-add-bundle>
