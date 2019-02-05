@@ -35,14 +35,16 @@ const updatePath = (id, updates, opts = { runValidators: true, new: true }) => {
 		throw new Error('ID and updates must be set');
 	}
 
+
 	return Path.findOneAndUpdate({ _id: id }, { $set: updates }, opts);
 };
 
-const deletePath = (id) => {
+const deletePath = (id, cb) => {
 	if (!id) {
 		throw new Error('ID must be set');
 	}
-	return Path.findOneAndDelete({ _id: id });
+
+	return Path.findOneAndRemove({ _id: id }, cb);
 };
 
 module.exports = {

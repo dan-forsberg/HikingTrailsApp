@@ -53,7 +53,7 @@ router.delete('/:id', (req, res) => {
 		.then(() => {
 			res.send({});
 		})
-		.err((err) => {
+		.catch((err) => {
 			res.status(500);
 			res.send("Internal error");
 		});

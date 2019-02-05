@@ -1,27 +1,27 @@
 const express = require('express');
 const router = express.Router();
-const path = require('../models/path');
+const bundle = require('../models/bundle');
 
 router.get('/', (req, res) => {
 	res.send({succeeded: false, msg: 'Use api/ for GETs'});
 });
 
 router.post('/', (req, res) => {
-	const reqPath = req.body.newPath;
+	const reqBundle = req.body.newBundle;
 	let errs = [];
 
-	if (!reqPath) {
-		errs.push('Got no newPath');
+	if (!reqBundle) {
+		errs.push('Got no newBundle');
 	}
-	if (!reqPath === {}) {
-		errs.push('New path empty');
+	if (!reqBundle === {}) {
+		errs.push('New bundle empty');
 	}
 	/* further validation could be added here... */
 	if (errs.length)
 		res.send({succeeded: false, msg: errs});
 
-	const newPath = new path.Path(reqPath);
-	path.addPath(newPath).then((pl) => {
+	const newBundle = new bundle.Bundle(reqBundle);
+	bundle.addBundle(newBundle).then((pl) => {
 		res.send(pl)
 	})
 	.catch((err) => {
@@ -35,9 +35,11 @@ router.put('/:id', (req, res) => {
 	const reqId = req.params.id;
 	const reqUpdates = req.body.updates;
 
-	path.updatePath(reqId, reqUpdates)
-		.then((updatedPath) => {
-			res.send(updatedPath);
+	console.log("Got id: " + reqId + " with updates: " + reqUpdates);
+
+	bundle.updateBundle(reqId, reqUpdates)
+		.then((updatedBundle) => {
+			res.send(updatedBundle);
 		})
 		.catch((err) => {
 			res.status(500);
@@ -49,11 +51,11 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
 	const reqId = req.params.id;
 
-	path.deletePath(reqId)
+	bundle.deleteBundle(reqId)
 		.then(() => {
 			res.send({});
 		})
-		.err((err) => {
+		.catch((err) => {
 			res.status(500);
 			res.send("Internal error");
 		});
