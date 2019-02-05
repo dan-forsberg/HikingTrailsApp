@@ -17,7 +17,7 @@ The admin API will be exposed at ~/api/admin~ for admins to GET, POST, PUT, or D
 
 | Operation | endpoint | parameters              | Example            |
 |-----------+----------+-------------------------+--------------------|
-| GET       | /api     | [path:id] or [place:id] | GET \/api\/path\/2 |
+| GET       | /api     | [path/id] or [place/id] | GET \/api\/path\/2 |
 | POST      | /api     | none                    | Not supported.     |
 | PUT       | /api     | none                    | Not supported.     |
 | DELETE    | /api     | none                    | Not supported.     |
