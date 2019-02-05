@@ -51,7 +51,7 @@ router.delete('/:id', (req, res) => {
 
 	place.deletePlace(reqId)
 		.then(() => {
-			res.send({});
+			res.send({succeeded: true});
 		})
 		.catch((err) => {
 			res.status(500);

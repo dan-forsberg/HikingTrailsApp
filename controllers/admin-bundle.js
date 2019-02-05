@@ -53,7 +53,7 @@ router.delete('/:id', (req, res) => {
 
 	bundle.deleteBundle(reqId)
 		.then(() => {
-			res.send({});
+			res.send({succeeded: true});
 		})
 		.catch((err) => {
 			res.status(500);
