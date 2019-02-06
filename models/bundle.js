@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const util = require("util");
 
 const bundleSchema = mongoose.Schema({
 	_id: Number,
@@ -28,12 +29,12 @@ const getBundle = (id) => {
 	return Bundle.findOne({ _id: id });
 };
 
-const updateBundle = (id, updates, opts = { runValidator: true, new: true }) => {
-	if (!id || !updates) {
-		throw new Error('ID and updates must be set');
+const updateBundle = (bundle, opts = { runValidator: true, new: true }) => {
+	if (!bundle) {
+		throw new Error('Bundle must be set');
 	}
 
-	return Bundle.findOneAndUpdate({ _id: id }, { $set: updates }, opts);
+	return Bundle.findOneAndUpdate({ _id: bundle._id }, { $set: bundle }, opts);
 };
 
 const deleteBundle = (id) => {

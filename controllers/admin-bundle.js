@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bundle = require('../models/bundle');
+const util = require('util');
 
 router.get('/', (req, res) => {
 	res.send({succeeded: false, msg: 'Use api/ for GETs'});
@@ -31,13 +32,13 @@ router.post('/', (req, res) => {
 	});
 });
 
-router.put('/:id', (req, res) => {
-	const reqId = req.params.id;
-	const reqUpdates = req.body.updates;
+router.put('/', (req, res) => {
+	const incoming = req.body.bundle;
+	if(!incoming || incoming === {}) {
+		res.send('Bundle not set.');
+	}
 
-	console.log("Got id: " + reqId + " with updates: " + reqUpdates);
-
-	bundle.updateBundle(reqId, reqUpdates)
+	bundle.updateBundle(incoming)
 		.then((updatedBundle) => {
 			res.send(updatedBundle);
 		})
