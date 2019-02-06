@@ -24,7 +24,7 @@ export class PathService {
   }
 
   deletePath(path: Path) {
-    return this.http.delete<Path>(`${this.server}/admin/path/${path.id}`,
+    return this.http.delete<Path>(`${this.server}/admin/path/${path._id}`,
      { headers: this.headers })
      .pipe(
        tap(_ => console.log(`Deleted path ${path.name}`))

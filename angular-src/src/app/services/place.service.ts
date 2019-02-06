@@ -24,7 +24,7 @@ export class PlaceService {
   }
 
   deletePlace(place: Place) {
-    return this.http.delete<Place>(`${this.server}/admin/place/${place.id}`,
+    return this.http.delete<Place>(`${this.server}/admin/place/${place._id}`,
      { headers: this.headers })
      .pipe(
        tap(_ => console.log(`Deleted place ${place.name}`))
