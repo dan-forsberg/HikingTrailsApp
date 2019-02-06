@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Bundle } from '../models/Bundle';
 import { Observable } from 'rxjs';
 
-import { map, catchError, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,15 +24,24 @@ export class BundleService {
   }
 
   deleteBundle(bundle: Bundle) {
-    return this.http.delete<Bundle>(`${this.server}/bundle/${bundle.id}`,
+    return this.http.delete<Bundle>(`${this.server}/admin/bundle/${bundle.id}`,
      { headers: this.headers })
      .pipe(
-       tap(_ => console.log(`Deleted list ${bundle.name}`))
+       tap(_ => console.log(`Deleted bundle ${bundle.name}`))
      );
+  }
+
+  updateBundle(bundle: Bundle) {
+    const body = JSON.stringify({ bundle });
+    return this.http.put<Bundle>(`${this.server}/admin/bundle/`, body,
+    { headers: this.headers })
+    .pipe(
+      tap(_ => console.log(`Updated bundle ${bundle.name}`))
+    );
   }
 
   addBundle(bundle: Bundle): Observable<Bundle> {
     const body = JSON.stringify(bundle);
-    return this.http.post<Bundle>(this.server, body, { headers: this.headers });
+    return this.http.post<Bundle>(`${this.server}/admin/bundle/`, body, { headers: this.headers });
   }
 }
