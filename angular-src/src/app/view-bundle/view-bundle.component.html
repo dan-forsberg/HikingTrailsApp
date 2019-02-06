@@ -2,6 +2,25 @@
 <div class="bundle" *ngFor="let bundle of bundles">
   <h3>{{bundle.name}}</h3>
   <p>{{bundle.info}}</p>
+  <button class="edit" (click)="onSelect(bundle)">Edit</button>
+</div>
+
+<div *ngIf="selectedBundle">
+  <h2>Editing #{{selectedBundle._id}}</h2>
+  <label>Name:
+    <input required [(ngModel)]="selectedBundle.name"/>
+  </label><br/>
+  <label>Info:
+    <input required [(ngModel)]="selectedBundle.info"/>
+  </label><br/>
+  <label>Paths:
+    <input required [(ngModel)]="selectedBundle.paths"/>
+  </label><br/>
+  <label>Image:
+    <input [(ngModel)]="selectedBundle.image"/>
+  </label><br/>
+  <button id="finish-edit" (click)="updateBundle()">Submit</button>
+  <button id="delete" (click)="deleteBundle()">DELETE</button>
 </div>
 
 <app-add-bundle></app-add-bundle>

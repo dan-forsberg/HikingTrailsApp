@@ -24,7 +24,7 @@ export class BundleService {
   }
 
   deleteBundle(bundle: Bundle) {
-    return this.http.delete<Bundle>(`${this.server}/admin/bundle/${bundle.id}`,
+    return this.http.delete<Bundle>(`${this.server}/admin/bundle/${bundle._id}`,
      { headers: this.headers })
      .pipe(
        tap(_ => console.log(`Deleted bundle ${bundle.name}`))

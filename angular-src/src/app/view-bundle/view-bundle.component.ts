@@ -9,11 +9,26 @@ import { BundleService } from '../services/bundle.service';
 })
 export class ViewBundleComponent implements OnInit {
   bundles: Bundle[] = [];
+  selectedBundle: Bundle = null;
 
   constructor(private bundleServ: BundleService) { }
 
   ngOnInit() {
     this.loadBundles();
+  }
+
+  onSelect(bundle: Bundle) {
+    if (this.selectedBundle === bundle) {
+      this.selectedBundle = null;
+    } else {
+      this.selectedBundle = bundle;
+    }
+  }
+
+  updateBundle() {
+    this.bundleServ.updateBundle(this.selectedBundle).subscribe(
+      resp => console.log(resp)
+    );
   }
 
   loadBundles() {
@@ -22,11 +37,11 @@ export class ViewBundleComponent implements OnInit {
     );
   }
 
-  deleteBundle(bundle: Bundle) {
-    this.bundleServ.deleteBundle(bundle).subscribe(
+  deleteBundle() {
+    this.bundleServ.deleteBundle(this.selectedBundle).subscribe(
       resp => this.bundles = this.bundles
         .filter(bundles =>
-          bundles !== bundle
+          bundles !== this.selectedBundle
         )
     );
   }
