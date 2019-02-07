@@ -20,7 +20,11 @@ export class PathService {
   }
 
   getAllPaths(): Observable<Path[]> {
-    return this.http.get<Path[]>(`${this.server}/api`);
+    return this.http.get<Path[]>(`${this.server}/api/path`);
+  }
+
+  getPath(id: number) {
+    return this.http.get<Path>(`${this.server}/api/path/${id}`);
   }
 
   deletePath(path: Path) {
