@@ -1,3 +1,22 @@
-<p>
-  add-path works!
-</p>
+<div>
+  <h3>Adding new Path</h3>
+  <label>Name:
+    <input required [(ngModel)]="newPath.name"/>
+  </label><br/>
+  <label>Info:
+    <input required [(ngModel)]="newPath.info"/>
+  </label><br/>
+  <label>Length:
+    <input required [(ngModel)]="newPath.length"/>
+  </label><br/>
+  <label>Duration:
+    <input required [(ngModel)]="newPath.duration"/>
+  </label><br/>
+  <label>Places:
+    <input required [(ngModel)]="newPath.places"/>
+  </label><br/>
+  <label>Image:
+    <input [(ngModel)]="newPath.image"/>
+  </label><br/>
+  <button (click)="submit()">Submit</button>
+</div>

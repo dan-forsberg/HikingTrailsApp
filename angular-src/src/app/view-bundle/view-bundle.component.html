@@ -15,4 +15,7 @@
 <button (click)="toggleAddBundle()">Add a bundle</button>
 <button (click)="toggleAddPath()">Add a path</button>
 <button (click)="toggleAddPlace()">Add a place</button>
+
 <app-add-bundle *ngIf="showAddBundle"></app-add-bundle>
+<app-add-path *ngIf="showAddPath"></app-add-path>
+<app-add-place *ngIf="showAddPlace"></app-add-place>

@@ -1,3 +1,22 @@
-<p>
-  add-place works!
-</p>
+<div>
+  <h3>Adding new Place</h3>
+  <label>Name:
+    <input required [(ngModel)]="newPlace.name"/>
+  </label><br/>
+  <label>Info:
+    <input required [(ngModel)]="newPlace.info"/>
+  </label><br/>
+  <label>Image:
+    <input [(ngModel)]="newPlace.image"/>
+  </label><br/>
+  <label>Radius:
+    <input [(ngModel)]="newPlace.radius"/>
+  </label><br/>
+  <label>Longitude:
+    <input [(ngModel)]="newPlace.position.lng"/>
+  </label><br/>
+  <label>Latitude:
+    <input [(ngModel)]="newPlace.position.lat"/>
+  </label>
+  <button (click)="submit()">Submit</button>
+</div>

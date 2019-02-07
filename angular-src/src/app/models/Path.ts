@@ -8,5 +8,5 @@ export interface Path {
   length: string;
   duration: number;
   places: string[];
-  polyline: Position[];
+  polyline?: Position[];
 }

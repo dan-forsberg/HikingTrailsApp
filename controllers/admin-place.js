@@ -22,8 +22,10 @@ router.post('/', (req, res) => {
 		res.send({succeeded: false, msg: errs});
 
 	const newPlace = new place.Place(reqPlace);
+	console.log("Adding place");
 	place.addPlace(newPlace).then((pl) => {
 		res.send(pl)
+		console.log("Added");
 	})
 	.catch((err) => {
 		res.status(500);

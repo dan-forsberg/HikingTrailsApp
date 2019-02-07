@@ -45,7 +45,7 @@ export class PathService {
   }
 
   addPath(path: Path): Observable<Path> {
-    const body = JSON.stringify(path);
+    const body = JSON.stringify({newPath: path});
     return this.http.post<Path>(`${this.server}/admin/path/`, body, { headers: this.headers });
   }
 }

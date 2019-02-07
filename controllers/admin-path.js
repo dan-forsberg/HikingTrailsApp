@@ -20,7 +20,10 @@ router.post('/', (req, res) => {
 	if (errs.length)
 		res.send({succeeded: false, msg: errs});
 
+	const id = Math.random(Number.MAX_SAFE_INTEGER);
 	const newPath = new path.Path(reqPath);
+	newPath._id = id;
+
 	path.addPath(newPath).then((pl) => {
 		res.send(pl)
 	})

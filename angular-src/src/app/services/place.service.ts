@@ -45,7 +45,8 @@ export class PlaceService {
   }
 
   addPlace(place: Place): Observable<Place> {
-    const body = JSON.stringify(place);
+    const body = JSON.stringify({newPlace: place});
+    console.log(`Sending: ${body}`);
     return this.http.post<Place>(`${this.server}/admin/place/`, body, { headers: this.headers });
   }
 }
