@@ -12,16 +12,26 @@ export class AddBundleComponent implements OnInit {
     name: '',
     image: '',
     info: '',
-    paths: []
+    paths: [],
   };
+  /* Take user input as a string, parse it into number[]
+   * and add it into newBundle.paths. If saving input directly into
+   * newBundle.paths backend will reject */
+  paths: string;
 
-  constructor(private bundleServ: BundleService) {
-   }
+  constructor(private bundleServ: BundleService) {}
 
   ngOnInit() {
   }
 
   submit() {
+    /* split on comma with optional whitespace */
+    const pathsExploded = this.paths.split(/\s*,\s*/);
+    for (let i = 0; i < pathsExploded.length; i++) {
+      const path = pathsExploded[i];
+      this.newBundle.paths.push(Number(path));
+    }
+
     /* TODO: add EE */
     this.bundleServ.addBundle(this.newBundle).subscribe(
       resp => console.log(resp)

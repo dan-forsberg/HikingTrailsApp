@@ -17,6 +17,9 @@ router.post('/', (req, res) => {
 	if (!reqBundle === {}) {
 		errs.push('New bundle empty');
 	}
+	if (typeof req.body.paths !== array) {
+		errs.push("Couldn't cast paths to array");
+	}
 	/* further validation could be added here... */
 	if (errs.length) {
 		res.send({succeeded: false, msg: errs});
