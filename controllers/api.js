@@ -16,8 +16,7 @@ async function getPolyline(places) {
 		// this is *NOT* perfect or efficient
 		await place.getPlace(places[i])
 			.then((pl) => {
-				console.log("Got pl: " + pl.position);
-				polyline.push(pl.position);
+				polyline.push({positions: pl.position, radius: pl.radius});
 			})
 			.catch((err) => {
 				console.error(err);
