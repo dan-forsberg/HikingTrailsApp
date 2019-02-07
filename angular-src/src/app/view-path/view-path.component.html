@@ -3,4 +3,5 @@
   <h3>Path: {{ path.name }}</h3>
   <p>{{ path.info }}</p>
   <p>This path takes approximately {{ path.duration }} minutes and is {{ path.length }} km long.</p>
+  <app-view-polyline [positions]="path.polyline"></app-view-polyline>
 </div>

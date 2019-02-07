@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
 import { ViewBundleComponent } from './view-bundle/view-bundle.component';
@@ -31,6 +32,9 @@ import { ViewPolylineComponent } from './view-polyline/view-polyline.component';
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyA6pSnATPY41mvcPTUhkwtqb3n1Y5BEaR0'
+    })
   ],
   providers: [BundleService, PathService, PlaceService],
   bootstrap: [AppComponent]
