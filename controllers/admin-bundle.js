@@ -18,10 +18,14 @@ router.post('/', (req, res) => {
 		errs.push('New bundle empty');
 	}
 	/* further validation could be added here... */
-	if (errs.length)
+	if (errs.length) {
 		res.send({succeeded: false, msg: errs});
+	}
 
+	const id = Math.random(Number.MAX_SAFE_INTEGER);
 	const newBundle = new bundle.Bundle(reqBundle);
+	newBundle._id = id;
+
 	bundle.addBundle(newBundle).then((pl) => {
 		res.send(pl)
 	})
