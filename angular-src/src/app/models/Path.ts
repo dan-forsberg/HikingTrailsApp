@@ -1,4 +1,4 @@
-import {PlacePosition} from './PlacePosition';
+import {Position} from './Position';
 
 export interface Path {
   _id?: number;
@@ -8,5 +8,5 @@ export interface Path {
   length: string;
   duration: number;
   places: string[];
-  polyline: PlacePosition[];
+  polyline: Position[];
 }
