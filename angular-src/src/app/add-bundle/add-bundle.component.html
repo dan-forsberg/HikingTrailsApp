@@ -1,3 +1,15 @@
-<p>
-  add-bundle works!
-</p>
+<div>
+  <label>Name:
+    <input required [(ngModel)]="newBundle.name"/>
+  </label><br/>
+  <label>Info:
+    <input required [(ngModel)]="newBundle.info"/>
+  </label><br/>
+  <label>Paths:
+    <input required [(ngModel)]="newBundle.paths"/>
+  </label><br/>
+  <label>Image:
+    <input [(ngModel)]="newBundle.image"/>
+  </label><br/>
+  <button (click)="submit()">Submit</button>
+</div>

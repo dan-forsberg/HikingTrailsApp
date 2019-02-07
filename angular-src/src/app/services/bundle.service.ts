@@ -41,7 +41,7 @@ export class BundleService {
   }
 
   addBundle(bundle: Bundle): Observable<Bundle> {
-    const body = JSON.stringify(bundle);
+    const body = JSON.stringify({newBundle: bundle});
     return this.http.post<Bundle>(`${this.server}/admin/bundle/`, body, { headers: this.headers });
   }
 }
