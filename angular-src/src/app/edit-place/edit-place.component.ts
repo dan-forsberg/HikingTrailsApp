@@ -15,7 +15,6 @@ export class EditPlaceComponent implements OnInit {
   constructor(private placeServ: PlaceService) { }
 
   ngOnInit() {
-    this.media = this.place.media[0];
   }
 
   updatePlace() {
