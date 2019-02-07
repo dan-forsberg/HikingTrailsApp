@@ -16,6 +16,9 @@ import { ViewPathComponent } from './view-path/view-path.component';
 import { AddPathComponent } from './add-path/add-path.component';
 import { EditPathComponent } from './edit-path/edit-path.component';
 import { ViewPolylineComponent } from './view-polyline/view-polyline.component';
+import { ViewPlaceComponent } from './view-place/view-place.component';
+import { AddPlaceComponent } from './add-place/add-place.component';
+import { EditPlaceComponent } from './edit-place/edit-place.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { ViewPolylineComponent } from './view-polyline/view-polyline.component';
     ViewPathComponent,
     AddPathComponent,
     EditPathComponent,
-    ViewPolylineComponent
+    ViewPolylineComponent,
+    ViewPlaceComponent,
+    AddPlaceComponent,
+    EditPlaceComponent
   ],
   imports: [
     BrowserModule,
