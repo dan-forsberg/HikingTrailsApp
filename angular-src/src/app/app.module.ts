@@ -11,13 +11,21 @@ import { PathService } from './services/path.service';
 import { PlaceService } from './services/place.service';
 import { AddBundleComponent } from './add-bundle/add-bundle.component';
 import { EditBundleComponent } from './edit-bundle/edit-bundle.component';
+import { ViewPathComponent } from './view-path/view-path.component';
+import { AddPathComponent } from './add-path/add-path.component';
+import { EditPathComponent } from './edit-path/edit-path.component';
+import { ViewPolylineComponent } from './view-polyline/view-polyline.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ViewBundleComponent,
     AddBundleComponent,
-    EditBundleComponent
+    EditBundleComponent,
+    ViewPathComponent,
+    AddPathComponent,
+    EditPathComponent,
+    ViewPolylineComponent
   ],
   imports: [
     BrowserModule,

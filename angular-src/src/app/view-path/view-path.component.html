@@ -1,0 +1,6 @@
+<!-- *ngIf to prevent trying to show before data is fetched -->
+<div class="path" *ngIf="path">
+  <h3>Path: {{ path.name }}</h3>
+  <p>{{ path.info }}</p>
+  <p>This path takes approximately {{ path.duration }} minutes and is {{ path.length }} km long.</p>
+</div>

@@ -6,9 +6,9 @@
 
 <div class="more-bundle-info" *ngIf="showMoreInfo">
     <div class="path" *ngFor="let path of selectedBundle.paths">
-      <span>Path: {{ path }}</span>
+      <app-view-path [path_id]="path"></app-view-path>
     </div>
-    <button class="edit" (click)="toggleEdit()">Edit</button>
+    <button class="edit" (click)="toggleEdit()">Edit bundle</button>
     <app-edit-bundle *ngIf="showEditBundle" [bundle]="selectedBundle"></app-edit-bundle>
 </div>
 
