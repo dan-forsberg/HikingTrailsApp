@@ -1,3 +1,5 @@
+import {PlacePosition} from './PlacePosition';
+
 export interface Path {
   _id?: number;
   image?: string;
@@ -6,5 +8,5 @@ export interface Path {
   length: string;
   duration: number;
   places: string[];
-  polyline: object[];
+  polyline: PlacePosition[];
 }

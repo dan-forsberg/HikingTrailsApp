@@ -1,4 +1,4 @@
 export interface Position {
-  position: Object;
-  radius: number;
+  lng: number;
+  lat: number;
 }

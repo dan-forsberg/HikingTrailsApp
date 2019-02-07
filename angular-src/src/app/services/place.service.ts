@@ -20,7 +20,11 @@ export class PlaceService {
   }
 
   getAllPlaces(): Observable<Place[]> {
-    return this.http.get<Place[]>(`${this.server}/api`);
+    return this.http.get<Place[]>(`${this.server}/api/place`);
+  }
+
+  getPlace(id: number): Observable<Place> {
+    return this.http.get<Place>(`${this.server}/api/place/${id}`);
   }
 
   deletePlace(place: Place) {

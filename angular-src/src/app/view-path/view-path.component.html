@@ -4,8 +4,9 @@
   <p>{{ path.info }}</p>
   <p>This path takes approximately {{ path.duration }} minutes and is {{ path.length }} km long.</p>
   <p>It covers {{ path.places.length }} places, mapped below.</p>
-  <app-view-polyline [positions]="path.polyline"></app-view-polyline>
+  <app-view-polyline class="path-map" [positions]="path.polyline"></app-view-polyline>
 
+  <app-view-place *ngFor="let place of path.places" [place_id]="place"></app-view-place>
   <button (click)="toggleEditPath()">Edit path</button>
   <app-edit-path [path]="path" *ngIf="editPath"></app-edit-path>
 </div>

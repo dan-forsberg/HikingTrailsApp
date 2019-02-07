@@ -1,3 +1,16 @@
-<p>
-  view-place works!
-</p>
+<div class="place-info" *ngIf="place">
+  <h4>{{ place.name }}</h4>
+  <p>{{ place.info }}<br />
+  <img *ngIf="place.image" src="{{ place.image }}"/>
+
+  <div class="add-media">
+    <p *ngFor="let medium of place.media">
+      <span>Contents:</span> {{ medium.contents }}<br />
+      <span>Name:</span> {{ medium.name }}<br />
+      <img *ngIf="medium.image" src="{{medium.image}}"/>
+    </p>
+  </div>
+</div>
+
+<button (click)="toggleEditPlace()">Edit place</button>
+<app-edit-place [place]="place" *ngIf="editPlace"></app-edit-place>

@@ -1,3 +1,37 @@
-<p>
-  edit-place works!
-</p>
+<div>
+  <h2>Editing #{{place._id}}</h2>
+  <label>Name:
+    <input required [(ngModel)]="place.name"/>
+  </label><br/>
+  <label>Info:
+    <input required [(ngModel)]="place.info"/>
+  </label><br/>
+  <label>Radius:
+    <input required [(ngModel)]="place.radius"/>
+  </label><br/>
+  <label>Longitude:
+    <input required [(ngModel)]="place.position.lng"/>
+  </label><br/>
+  <label>Latitude:
+    <input required [(ngModel)]="place.position.lat"/>
+  </label><br/>
+  <label>Image:
+    <input [(ngModel)]="place.image"/>
+  </label><br/>
+  <div class="add-media">
+    <label>Media type:
+      <input [(ngModel)]="media.type"/>
+    </label><br />
+    <label>Name:
+      <input [(ngModel)]="media.name"/>
+    </label><br />
+    <label>Contents:
+      <input [(ngModel)]="media.contents"/>
+    </label><br />
+    <label>Image:
+      <input [(ngModel)]="media.image"/>
+    </label><br />
+  </div>
+  <button id="finish-edit" (click)="updatePlace()">Submit</button>
+  <button id="delete" (click)="deletePlace()">DELETE</button>
+</div>

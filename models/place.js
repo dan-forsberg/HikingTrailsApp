@@ -39,11 +39,11 @@ const deletePlace = (id) => {
 };
 
 const updatePlace = (place, opts = { runValidators: true, new: true }) => {
-	if (!id || !updates) {
-		throw Error('ID and updates must be set');
+	if (!place) {
+		throw Error('Place must be set');
 	}
 
-	return Place.findOneAndUpdate({ _id: place.id }, { $set: place }, opts);
+	return Place.findOneAndUpdate({ _id: place._id }, { $set: place }, opts);
 };
 
 module.exports = {

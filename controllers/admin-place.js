@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const place = require('../models/place');
+const util = require('util');
 
 router.get('/', (req, res) => {
 	res.send({succeeded: false, msg: 'Use api/ for GETs'});

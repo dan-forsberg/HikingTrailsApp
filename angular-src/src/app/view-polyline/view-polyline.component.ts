@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Position } from '../models/Position';
+import { PlacePosition } from '../models/PlacePosition';
 
 @Component({
   selector: 'app-view-polyline',
@@ -7,7 +7,7 @@ import { Position } from '../models/Position';
   styleUrls: ['./view-polyline.component.css']
 })
 export class ViewPolylineComponent implements OnInit {
-  @Input() positions: Position[];
+  @Input() positions: PlacePosition[];
 
   constructor() { }
 

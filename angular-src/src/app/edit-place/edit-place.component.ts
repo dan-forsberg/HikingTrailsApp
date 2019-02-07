@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Place } from '../models/Place';
+import { Media } from '../models/Media';
+import { PlaceService } from '../services/place.service';
 
 @Component({
   selector: 'app-edit-place',
@@ -6,10 +9,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-place.component.css']
 })
 export class EditPlaceComponent implements OnInit {
+  @Input() place: Place;
+  media: Media;
 
-  constructor() { }
+  constructor(private placeServ: PlaceService) { }
 
   ngOnInit() {
+    this.media = this.place.media[0];
+  }
+
+  updatePlace() {
+    /* TODO: add EE */
+    this.place.media.push(this.media);
+    this.placeServ.updatePlace(this.place).subscribe(
+      resp => console.log(resp)
+    );
+  }
+
+  deletePlace() {
+    this.placeServ.deletePlace(this.place).subscribe(
+      resp => console.log(resp)
+    );
   }
 
 }
