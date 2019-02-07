@@ -23,4 +23,5 @@
   <button id="delete" (click)="deleteBundle()">DELETE</button>
 </div>
 
-<app-add-bundle></app-add-bundle>
+<button (click)="toggleAddBundle()">Add a bundle</button>
+<app-add-bundle *ngIf="showAddBundle"></app-add-bundle>

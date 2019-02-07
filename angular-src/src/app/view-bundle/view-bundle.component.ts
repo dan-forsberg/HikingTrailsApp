@@ -10,6 +10,7 @@ import { BundleService } from '../services/bundle.service';
 export class ViewBundleComponent implements OnInit {
   bundles: Bundle[] = [];
   selectedBundle: Bundle = null;
+  showAddBundle = false;
 
   constructor(private bundleServ: BundleService) { }
 
@@ -23,6 +24,10 @@ export class ViewBundleComponent implements OnInit {
     } else {
       this.selectedBundle = bundle;
     }
+  }
+
+  toggleAddBundle() {
+    this.showAddBundle = !this.showAddBundle;
   }
 
   updateBundle() {
