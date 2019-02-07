@@ -10,17 +10,19 @@ import { BundleService } from './services/bundle.service';
 import { PathService } from './services/path.service';
 import { PlaceService } from './services/place.service';
 import { AddBundleComponent } from './add-bundle/add-bundle.component';
+import { EditBundleComponent } from './edit-bundle/edit-bundle.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ViewBundleComponent,
-    AddBundleComponent
+    AddBundleComponent,
+    EditBundleComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [BundleService, PathService, PlaceService],
   bootstrap: [AppComponent]

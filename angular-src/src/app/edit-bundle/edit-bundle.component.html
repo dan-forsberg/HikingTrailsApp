@@ -1,3 +1,17 @@
-<p>
-  edit-bundle works!
-</p>
+<div>
+  <h2>Editing #{{bundle._id}}</h2>
+  <label>Name:
+    <input required [(ngModel)]="bundle.name"/>
+  </label><br/>
+  <label>Info:
+    <input required [(ngModel)]="bundle.info"/>
+  </label><br/>
+  <label>Paths:
+    <input required [(ngModel)]="bundle.paths"/>
+  </label><br/>
+  <label>Image:
+    <input [(ngModel)]="bundle.image"/>
+  </label><br/>
+  <button id="finish-edit" (click)="updateBundle()">Submit</button>
+  <button id="delete" (click)="deleteBundle()">DELETE</button>
+</div>

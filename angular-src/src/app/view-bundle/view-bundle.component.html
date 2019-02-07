@@ -1,26 +1,15 @@
 <h2>HikingTrails - Bundles</h2>
-<div class="bundle" *ngFor="let bundle of bundles">
+<div class="bundle" *ngFor="let bundle of bundles" (click)="toggleMoreInfo(bundle)">
   <h3>{{bundle.name}}</h3>
   <p>{{bundle.info}}</p>
-  <button class="edit" (click)="onSelect(bundle)">Edit</button>
 </div>
 
-<div *ngIf="selectedBundle">
-  <h2>Editing #{{selectedBundle._id}}</h2>
-  <label>Name:
-    <input required [(ngModel)]="selectedBundle.name"/>
-  </label><br/>
-  <label>Info:
-    <input required [(ngModel)]="selectedBundle.info"/>
-  </label><br/>
-  <label>Paths:
-    <input required [(ngModel)]="selectedBundle.paths"/>
-  </label><br/>
-  <label>Image:
-    <input [(ngModel)]="selectedBundle.image"/>
-  </label><br/>
-  <button id="finish-edit" (click)="updateBundle()">Submit</button>
-  <button id="delete" (click)="deleteBundle()">DELETE</button>
+<div class="more-bundle-info" *ngIf="showMoreInfo">
+    <div class="path" *ngFor="let path of selectedBundle.paths">
+      <span>Path: {{ path }}</span>
+    </div>
+    <button class="edit" (click)="toggleEdit()">Edit</button>
+    <app-edit-bundle *ngIf="showEditBundle" [bundle]="selectedBundle"></app-edit-bundle>
 </div>
 
 <button (click)="toggleAddBundle()">Add a bundle</button>

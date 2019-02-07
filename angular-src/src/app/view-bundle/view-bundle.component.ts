@@ -11,6 +11,8 @@ export class ViewBundleComponent implements OnInit {
   bundles: Bundle[] = [];
   selectedBundle: Bundle = null;
   showAddBundle = false;
+  showMoreInfo = false;
+  showEditBundle = false;
 
   constructor(private bundleServ: BundleService) { }
 
@@ -30,24 +32,18 @@ export class ViewBundleComponent implements OnInit {
     this.showAddBundle = !this.showAddBundle;
   }
 
-  updateBundle() {
-    this.bundleServ.updateBundle(this.selectedBundle).subscribe(
-      resp => console.log(resp)
-    );
+  toggleMoreInfo(bundle: Bundle) {
+    this.selectedBundle = bundle;
+    this.showMoreInfo = !this.showMoreInfo;
+  }
+
+  toggleEdit() {
+    this.showEditBundle = !this.showEditBundle;
   }
 
   loadBundles() {
     this.bundleServ.getAllBundles().subscribe(
       resp => this.bundles = resp
-    );
-  }
-
-  deleteBundle() {
-    this.bundleServ.deleteBundle(this.selectedBundle).subscribe(
-      resp => this.bundles = this.bundles
-        .filter(bundles =>
-          bundles !== this.selectedBundle
-        )
     );
   }
 }
