@@ -3,5 +3,9 @@
   <h3>Path: {{ path.name }}</h3>
   <p>{{ path.info }}</p>
   <p>This path takes approximately {{ path.duration }} minutes and is {{ path.length }} km long.</p>
+  <p>It covers {{ path.places.length }} places, mapped below.</p>
   <app-view-polyline [positions]="path.polyline"></app-view-polyline>
+
+  <button (click)="toggleEditPath()">Edit path</button>
+  <app-edit-path [path]="path" *ngIf="editPath"></app-edit-path>
 </div>

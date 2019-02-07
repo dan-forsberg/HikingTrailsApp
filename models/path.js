@@ -30,13 +30,12 @@ const getPath = (id) => {
 	return Path.findOne({ _id: id });
 };
 
-const updatePath = (id, updates, opts = { runValidators: true, new: true }) => {
-	if (!id || !updates) {
-		throw new Error('ID and updates must be set');
+const updatePath = (path, opts = { runValidators: true, new: true }) => {
+	if (!path) {
+		throw new Error('Path must be set');
 	}
 
-
-	return Path.findOneAndUpdate({ _id: id }, { $set: updates }, opts);
+	return Path.findOneAndUpdate({ _id: path._id }, { $set: path }, opts);
 };
 
 const deletePath = (id, cb) => {

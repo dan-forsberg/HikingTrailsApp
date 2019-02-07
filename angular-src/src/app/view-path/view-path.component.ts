@@ -11,12 +11,23 @@ export class ViewPathComponent implements OnInit {
   @Input() path_id: number;
   path: Path;
 
+  editPath = false;
+  addPath = false;
+
   constructor(private pathServ: PathService) { }
 
   ngOnInit() {
     this.pathServ.getPath(this.path_id).subscribe(
       resp => this.path = resp
     );
+  }
+
+  toggleAddPath() {
+    this.addPath = !this.addPath;
+  }
+
+  toggleEditPath() {
+    this.editPath = !this.editPath;
   }
 
 }

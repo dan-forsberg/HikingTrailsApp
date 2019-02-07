@@ -31,11 +31,13 @@ router.post('/', (req, res) => {
 	});
 });
 
-router.put('/:id', (req, res) => {
-	const reqId = req.params.id;
-	const reqUpdates = req.body.updates;
+router.put('/', (req, res) => {
+	const incoming = req.body.path;
+	if(!incoming || incoming === {}) {
+		res.send("Path not set");
+	}
 
-	path.updatePath(reqId, reqUpdates)
+	path.updatePath(incoming)
 		.then((updatedPath) => {
 			res.send(updatedPath);
 		})

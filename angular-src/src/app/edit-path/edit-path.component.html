@@ -1,3 +1,17 @@
-<p>
-  edit-path works!
-</p>
+<div>
+  <h2>Editing #{{path._id}}</h2>
+  <label>Name:
+    <input required [(ngModel)]="path.name"/>
+  </label><br/>
+  <label>Info:
+    <input required [(ngModel)]="path.info"/>
+  </label><br/>
+  <label>Paths:
+    <input required [(ngModel)]="path.places"/>
+  </label><br/>
+  <label>Image:
+    <input [(ngModel)]="path.image"/>
+  </label><br/>
+  <button id="finish-edit" (click)="updatePath()">Submit</button>
+  <button id="delete" (click)="deletePath()">DELETE</button>
+</div>

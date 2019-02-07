@@ -38,12 +38,12 @@ const deletePlace = (id) => {
 	return Place.findOneAndDelete({ _id: id });
 };
 
-const updatePlace = (id, updates, opts = { runValidators: true, new: true }) => {
+const updatePlace = (place, opts = { runValidators: true, new: true }) => {
 	if (!id || !updates) {
 		throw Error('ID and updates must be set');
 	}
 
-	return Place.findOneAndUpdate({ _id: id }, { $set: updates }, opts);
+	return Place.findOneAndUpdate({ _id: place.id }, { $set: place }, opts);
 };
 
 module.exports = {

@@ -10,9 +10,12 @@ import { BundleService } from '../services/bundle.service';
 export class ViewBundleComponent implements OnInit {
   bundles: Bundle[] = [];
   selectedBundle: Bundle = null;
-  showAddBundle = false;
   showMoreInfo = false;
   showEditBundle = false;
+
+  showAddBundle = false;
+  showAddPath = false;
+  showAddPlace = false;
 
   constructor(private bundleServ: BundleService) { }
 
@@ -30,6 +33,14 @@ export class ViewBundleComponent implements OnInit {
 
   toggleAddBundle() {
     this.showAddBundle = !this.showAddBundle;
+  }
+
+  toggleAddPath() {
+    this.showAddPath = !this.showAddPath;
+  }
+
+  toggleAddPlace() {
+    this.showAddPlace = !this.showAddPlace;
   }
 
   toggleMoreInfo(bundle: Bundle) {
