@@ -32,7 +32,6 @@ I had considered using other solutions, like a more "traditional" LAMP-stack. Bu
 *** Exposed API description
 
 The API will be exposed at ~/api~ which will be for regular users to GET data.
-The admin API will be exposed at ~/api/admin~ for admins to GET, POST, PUT, or DELETE data.
 
 | Operation | endpoint | parameters              | Example            |
 |-----------+----------+-------------------------+--------------------|
@@ -40,6 +39,8 @@ The admin API will be exposed at ~/api/admin~ for admins to GET, POST, PUT, or D
 | POST      | /api     | none                    | Not supported.     |
 | PUT       | /api     | none                    | Not supported.     |
 | DELETE    | /api     | none                    | Not supported.     |
+
+The admin API will be exposed at ~/api/admin~ for admins to GET, POST, PUT, or DELETE data.
 
 | Operation | endpoint   | parameters                                 | Returns                  | Example                                             |
 |-----------+------------+--------------------------------------------+--------------------------+-----------------------------------------------------|
