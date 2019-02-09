@@ -23,14 +23,6 @@ export class ViewBundleComponent implements OnInit {
     this.loadBundles();
   }
 
-  onSelect(bundle: Bundle) {
-    if (this.selectedBundle === bundle) {
-      this.selectedBundle = null;
-    } else {
-      this.selectedBundle = bundle;
-    }
-  }
-
   onAddBundle(bundle: Bundle) {
     this.bundles = this.bundles.concat(bundle);
   }

@@ -14,6 +14,7 @@ export class EditBundleComponent implements OnInit {
   constructor(private bundleServ: BundleService) { }
 
   ngOnInit() {
+    console.log(this.bundle);
   }
 
   updateBundle() {

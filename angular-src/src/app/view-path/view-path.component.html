@@ -1,5 +1,5 @@
 <!-- *ngIf to prevent trying to show before data is fetched -->
-<div class="path" *ngIf="path">
+<div class="path" *ngIf="path && path.places">
   <h3>Path: {{ path.name }}</h3>
   <p>{{ path.info }}</p>
   <p>This path takes approximately {{ path.duration }} minutes and is {{ path.length }} km long.</p>
@@ -9,4 +9,9 @@
   <app-view-place *ngFor="let place of path.places" [place_id]="place"></app-view-place>
   <button (click)="toggleEditPath()">Edit path</button>
   <app-edit-path [path]="path" *ngIf="editPath"></app-edit-path>
+</div>
+
+<div *ngIf="path && !path.places">
+  <h3>Here be dragons</h3>
+  <p>This path doesn't seem to be connected to any known places</p>
 </div>
