@@ -1,8 +1,10 @@
-/* If a request gets here, it's malformed -- inform user of that */
+/*
+Page: admin/
+No request should go here -- just send error messages.
+*/
 
 const express = require('express');
 const router = express.Router();
-
 
 function req_not_valid(req_type = null, msg = null) {
 	return `{ succeeded: false, msg: 'Invalid request ${req_type}. ${msg}' }`;

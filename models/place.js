@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const util = require('util');
 
 const placeSchema = mongoose.Schema({
 	name: { type: String, required: true },
@@ -15,8 +14,19 @@ const placeSchema = mongoose.Schema({
 
 const Place = mongoose.model('Place', placeSchema);
 
+/**
+ * Show all places
+ *
+ * @returns A promise to find all places
+ */
 const getAllPlaces = () => Place.find();
 
+/**
+ * Get a specific place
+ *
+ * @param number id The ID of the place to get
+ * @returns A promise to get the specific place
+ */
 const getPlace = (id) => {
 	if (!id) {
 		throw Error('ID must be set');
@@ -24,6 +34,12 @@ const getPlace = (id) => {
 	return Place.findOne({ _id: id });
 };
 
+/**
+ * Create a new Place
+ *
+ * @param Place newPlace The Place to create
+ * @returns The promise for creating the new place
+ */
 const addPlace = (newPlace) => {
 	if (!newPlace) {
 		throw new Error('newPlace must be set');
@@ -31,6 +47,12 @@ const addPlace = (newPlace) => {
 	return newPlace.save();
 };
 
+/**
+ * Delete a place
+ *
+ * @param number id The ID of the place to delete
+ * @returns A promise to delete the place
+ */
 const deletePlace = (id) => {
 	if (!id) {
 		throw Error('ID must be set');
@@ -39,6 +61,13 @@ const deletePlace = (id) => {
 	return Place.findOneAndDelete({ _id: id });
 };
 
+/**
+ * Update a place
+ *
+ * @param Object place Either a partial or full Place -- include _id and params to update
+ * @param {boolean} [opts={ runValidator: true, new: true }]
+ * @returns A promise to update the place
+ */
 const updatePlace = (place, opts = { runValidators: true, new: true }) => {
 	if (!place) {
 		throw Error('Place must be set');
