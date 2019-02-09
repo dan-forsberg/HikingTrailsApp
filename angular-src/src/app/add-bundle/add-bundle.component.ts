@@ -8,12 +8,7 @@ import { BundleService } from '../services/bundle.service';
   styleUrls: ['./add-bundle.component.css']
 })
 export class AddBundleComponent implements OnInit {
-  newBundle: Bundle = {
-    name: '',
-    image: '',
-    info: '',
-    paths: [],
-  };
+  newBundle: Bundle;
   /* Take user input as a string, parse it into number[]
    * and add it into newBundle.paths. If saving input directly into
    * newBundle.paths backend will reject */
@@ -23,6 +18,12 @@ export class AddBundleComponent implements OnInit {
   constructor(private bundleServ: BundleService) {}
 
   ngOnInit() {
+    this.newBundle = {
+      name: '',
+      image: '',
+      info: '',
+      paths: [],
+    };
   }
 
   submit() {
@@ -35,6 +36,7 @@ export class AddBundleComponent implements OnInit {
 
     this.bundleServ.addBundle(this.newBundle).subscribe(
       resp => {
+        /* Success */
         if (resp.name === this.newBundle.name) {
           this.addBundle.emit(resp);
         }

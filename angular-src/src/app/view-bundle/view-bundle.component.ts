@@ -25,6 +25,8 @@ export class ViewBundleComponent implements OnInit {
 
   onAddBundle(bundle: Bundle) {
     this.bundles = this.bundles.concat(bundle);
+    /* collapse the addBundle */
+    this.showAddBundle = false;
   }
 
   onDelBundle(bundle: Bundle) {
