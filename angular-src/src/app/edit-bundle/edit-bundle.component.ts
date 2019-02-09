@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Bundle } from '../models/Bundle';
 import { BundleService } from '../services/bundle.service';
 
@@ -9,6 +9,7 @@ import { BundleService } from '../services/bundle.service';
 })
 export class EditBundleComponent implements OnInit {
   @Input() bundle: Bundle;
+  @Output() delBundle: EventEmitter<Bundle> = new EventEmitter<Bundle>();
 
   constructor(private bundleServ: BundleService) { }
 
@@ -16,6 +17,7 @@ export class EditBundleComponent implements OnInit {
   }
 
   updateBundle() {
+    /* Could show something to the end-user to confirm changes */
     this.bundleServ.updateBundle(this.bundle).subscribe(
       resp => console.log(resp)
     );
@@ -23,7 +25,7 @@ export class EditBundleComponent implements OnInit {
 
   deleteBundle() {
     this.bundleServ.deleteBundle(this.bundle).subscribe(
-      resp => console.log(resp)
+      resp => this.delBundle.emit(resp)
     );
   }
 

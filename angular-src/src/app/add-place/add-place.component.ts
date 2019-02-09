@@ -22,9 +22,14 @@ export class AddPlaceComponent implements OnInit {
   }
 
   submit() {
-    /* TODO: add EE */
     this.placeServ.addPlace(this.newPlace).subscribe(
-      resp => console.log(resp)
+      resp => {
+        /* success */
+        if (resp.name === this.newPlace.name) {
+          console.log('Place creation successful!');
+          this.addPlace.emit(resp);
+        }
+      }
     );
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {Path} from '../models/Path';
 import { PathService } from '../services/path.service';
 
@@ -17,15 +17,22 @@ export class AddPathComponent implements OnInit {
     places: [],
   };
 
+  @Output() addPath: EventEmitter<Path> = new EventEmitter<Path>();
+
   constructor(private pathServ: PathService) { }
 
   ngOnInit() {
   }
 
   submit() {
-    /* TODO: add EE */
     this.pathServ.addPath(this.newPath).subscribe(
-      resp => console.log(resp)
+      resp => {
+        /* success */
+        if (resp.name === this.newPath.name) {
+          console.log('Place creation successful!');
+          this.addPath.emit(resp);
+        }
+      }
     );
   }
 

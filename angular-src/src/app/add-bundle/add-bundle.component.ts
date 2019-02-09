@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Bundle } from '../models/Bundle';
 import { BundleService } from '../services/bundle.service';
 
@@ -18,6 +18,7 @@ export class AddBundleComponent implements OnInit {
    * and add it into newBundle.paths. If saving input directly into
    * newBundle.paths backend will reject */
   paths: string;
+  @Output() addBundle: EventEmitter<Bundle> = new EventEmitter<Bundle>();
 
   constructor(private bundleServ: BundleService) {}
 
@@ -32,9 +33,12 @@ export class AddBundleComponent implements OnInit {
       this.newBundle.paths.push(Number(path));
     }
 
-    /* TODO: add EE */
     this.bundleServ.addBundle(this.newBundle).subscribe(
-      resp => console.log(resp)
+      resp => {
+        if (resp.name === this.newBundle.name) {
+          this.addBundle.emit(resp);
+        }
+      }
     );
   }
 }

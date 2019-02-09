@@ -9,13 +9,14 @@
       <app-view-path [path_id]="path"></app-view-path>
     </div>
     <button class="edit" (click)="toggleEdit()">Edit bundle</button>
-    <app-edit-bundle *ngIf="showEditBundle" [bundle]="selectedBundle"></app-edit-bundle>
+    <app-edit-bundle (delBundle)="onDelBundle($event)" *ngIf="showEditBundle"
+    [bundle]="selectedBundle"></app-edit-bundle>
 </div>
 
 <button (click)="toggleAddBundle()">Add a bundle</button>
 <button (click)="toggleAddPath()">Add a path</button>
 <button (click)="toggleAddPlace()">Add a place</button>
 
-<app-add-bundle *ngIf="showAddBundle"></app-add-bundle>
+<app-add-bundle (addBundle)="onAddBundle($event)" *ngIf="showAddBundle"></app-add-bundle>
 <app-add-path *ngIf="showAddPath"></app-add-path>
 <app-add-place *ngIf="showAddPlace"></app-add-place>

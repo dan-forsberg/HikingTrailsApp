@@ -31,6 +31,16 @@ export class ViewBundleComponent implements OnInit {
     }
   }
 
+  onAddBundle(bundle: Bundle) {
+    this.bundles = this.bundles.concat(bundle);
+  }
+
+  onDelBundle(bundle: Bundle) {
+    this.bundles = this.bundles.filter(bun =>
+      bun !== bundle
+    );
+  }
+
   toggleAddBundle() {
     this.showAddBundle = !this.showAddBundle;
   }
