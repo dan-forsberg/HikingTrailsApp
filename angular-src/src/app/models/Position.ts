@@ -1,5 +1,5 @@
 export interface Position {
-  lng: number;
-  lat: number;
+  positions: {lng: number,
+    lat: number};
   radius: number;
 }

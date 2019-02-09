@@ -1,6 +1,7 @@
 /* App entry point */
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const dbConfig = require('./config/database');
 
 const api = require('./controllers/api');
@@ -19,6 +20,7 @@ const app = express();
 
 /* Setup the static file servering directory */
 app.use(express.static(__dirname + '/public'));
+app.use(cors());
 
 // Add a JSON-parser, as any incoming data should be json
 app.use(express.json({strict: false}));

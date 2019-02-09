@@ -28,7 +28,7 @@ export class EditBundleComponent implements OnInit {
   deleteBundle() {
     this.bundleServ.deleteBundle(this.bundle).subscribe(
       (resp) => {
-        /* */
+        /* if deletion was successful, emit it and hide this component */
         if (resp.succeeded) {
           this.delBundle.emit(this.bundle);
           this.deleted = true;

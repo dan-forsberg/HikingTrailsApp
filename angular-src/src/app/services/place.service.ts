@@ -10,23 +10,46 @@ import { tap } from 'rxjs/operators';
 })
 export class PlaceService {
 
-  private server = location.origin;
+  /**
+   * The URL of the API-server
+   * (same as the static serving server in this case)
+   */
+  private server = 'http://localhost:3000';//location.origin;
+
+  /**
+   * HTTP-headers for Content-Type: application/json
+   */
   private headers: HttpHeaders;
 
+  /**
+   * Creates an instance of PlaceService.
+   * @param http Injected HttpClient
+   */
   constructor(private http: HttpClient) {
     /* HttpHeaders is immutable */
     const HEADERS = new HttpHeaders();
     this.headers = HEADERS.append('Content-Type', 'application/json');
   }
 
+  /**
+   * Get all the places from the server
+   */
   getAllPlaces(): Observable<Place[]> {
     return this.http.get<Place[]>(`${this.server}/api/place`);
   }
 
+  /**
+   * Get a specific place
+   *
+   * @param id The _id of requesting place
+   */
   getPlace(id: number): Observable<Place> {
     return this.http.get<Place>(`${this.server}/api/place/${id}`);
   }
 
+  /**
+   * Tries to delete specified place
+   */
   deletePlace(place: Place) {
     return this.http.delete<Place>(`${this.server}/admin/place/${place._id}`,
      { headers: this.headers })
@@ -35,6 +58,11 @@ export class PlaceService {
      );
   }
 
+  /**
+   * Tries update specified place, with specified arguments
+   *
+   * @param place The place should include _id, then whatever changes should be made in the object
+   */
   updatePlace(place: Place) {
     const body = JSON.stringify({ place });
     return this.http.put<Place>(`${this.server}/admin/place/`, body,
@@ -44,6 +72,10 @@ export class PlaceService {
     );
   }
 
+  /**
+   * Tries to add the specified place
+   * @param place The place to add -- do not include _id
+   */
   addPlace(place: Place): Observable<Place> {
     const body = JSON.stringify({newPlace: place});
     console.log(`Sending: ${body}`);
