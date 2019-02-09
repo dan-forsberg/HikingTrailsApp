@@ -10,7 +10,7 @@ import { tap } from 'rxjs/operators';
 })
 export class PathService {
 
-  private server = 'http://localhost:3000';
+  private server = location.origin;
   private headers: HttpHeaders;
 
   constructor(private http: HttpClient) {

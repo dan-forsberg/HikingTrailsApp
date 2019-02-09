@@ -1,3 +1,22 @@
+* Installation
+Angular is configured to build into directory ~../public~ which will be the same
+directory that Node is told to serve from. These instructions assume you have
+~angular-cli~ and ~Node~ with ~NPM~ installed.
+
+#+BEGIN_SRC sh
+git clone [project]
+cd HikingTrailsApp/angular-src
+ng build
+cd ..
+npm start
+#+END_SRC
+
+The app will now listen to ~localhost~ on port ~3000~. To change port, just pass
+it as a argument.
+
+#+BEGIN_SRC sh
+npm start 80
+#+END_SRC
 * The stack design
 This project uses a MEAN stack. For the database it uses MongoDB, Node with Express for HTTP, and Angular for the front-end.
 

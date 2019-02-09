@@ -13,8 +13,13 @@ const adminPlace = require('./controllers/admin-place');
 /*
  * Setup express
  */
-const port = 3000;
+/* if a port was sent as an arg, use it, otherwise 3000 */
+const port = (process.argv.length > 2 ? process.argv[2] : 3000);
 const app = express();
+
+
+/* Setup the static file servering directory */
+app.use(express.static(__dirname + '/public'));
 
 app.use(cors());
 // Add a JSON-parser, as any incoming data should be json
@@ -91,6 +96,7 @@ const gracefulShutdown = () => {
 
 process.stdin.resume();
 process.on('exit', gracefulShutdown);
+process.on('SIGINT', gracefulShutdown);
 
 /* Export the port for testing */
 if (process.env.NODE_ENV === 'test') {
