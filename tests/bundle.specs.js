@@ -83,8 +83,8 @@ describe("The Bundle Model's", () => {
 
 	describe('update operations', () => {
 		it('should properly update a Bundle', (done) => {
-			const updates = { name: 'Updated test bundle' };
-			bundle.updateBundle(testBundle.id, updates)
+			const updates = { _id: testBundle.id, name: 'Updated test bundle' };
+			bundle.updateBundle(updates)
 				.then((bu) => {
 					if (bu.name === updates.name) {
 						testBundle = bu;
@@ -94,8 +94,8 @@ describe("The Bundle Model's", () => {
 		});
 
 		it('should not update a non-existing Bundle', (done) => {
-			const updates = { name: 'Does not exist!' };
-			bundle.updateBundle(DOESNOTEXIST, updates)
+			const updates = { _id: DOESNOTEXIST, name: 'Does not exist!' };
+			bundle.updateBundle(updates)
 				.then((bu) => {
 					if (bu === null) {
 						done();
@@ -104,8 +104,8 @@ describe("The Bundle Model's", () => {
 		});
 
 		it('should not update an existing Bundle with non-proper data', (done) => {
-			const updates = { paths: [NaN, NaN, 'Batman!'] };
-			bundle.updateBundle(testBundle.id, updates)
+			const updates = {_id: testBundle.id, paths: [NaN, NaN, 'Batman!'] };
+			bundle.updateBundle(updates)
 				.catch((err) => {
 					done();
 				});

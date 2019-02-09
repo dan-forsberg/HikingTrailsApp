@@ -89,8 +89,8 @@ describe("The Path Model's", () => {
 
 	describe('update operations', () => {
 		it('should properly update a Path', (done) => {
-			const updates = { name: 'Updated test path' };
-			path.updatePath(testPath.id, updates)
+			const updates = { _id: testPath.id, name: 'Updated test path' };
+			path.updatePath(updates)
 				.then((pa) => {
 					if (pa.name === updates.name) {
 						testPath = pa;
@@ -100,8 +100,8 @@ describe("The Path Model's", () => {
 		});
 
 		it('should not update a non-existing Path', (done) => {
-			const updates = { name: 'Does not exist!' };
-			path.updatePath(DOESNOTEXIST, updates)
+			const updates = { _id: DOESNOTEXIST, name: 'Does not exist!' };
+			path.updatePath(updates)
 				.then((pa) => {
 					if (pa === null) {
 						done();
@@ -110,8 +110,8 @@ describe("The Path Model's", () => {
 		});
 
 		it('should not update an existing Path with non-proper data', (done) => {
-			const updates = { name: 4, length: 'NaN', duration: NaN };
-			path.updatePath(testPath.id, updates)
+			const updates = { _id: testPath.id, name: 4, length: 'NaN', duration: NaN };
+			path.updatePath(updates)
 				.catch((err) => {
 					done();
 				});

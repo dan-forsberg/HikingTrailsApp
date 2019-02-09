@@ -85,8 +85,8 @@ describe("The Place Model's", () => {
 
 	describe('update operations', () => {
 		it('should properly update a Place', (done) => {
-			const updates = { name: 'Updated test place' };
-			place.updatePlace(testPlace.id, updates)
+			const updates = { _id: testPlace.id, name: 'Updated test place' };
+			place.updatePlace(updates)
 				.then((pl) => {
 					if (pl.name === updates.name) {
 						testPlace = pl;
@@ -96,8 +96,8 @@ describe("The Place Model's", () => {
 		});
 
 		it('should not update a non-existing Place', (done) => {
-			const updates = { name: 'Does not exist!' };
-			place.updatePlace(DEADBEEF, updates)
+			const updates = { _id: DEADBEEF, name: 'Does not exist!' };
+			place.updatePlace(updates)
 				.then((pl) => {
 					if (pl === null) {
 						done();
@@ -106,8 +106,8 @@ describe("The Place Model's", () => {
 		});
 
 		it('should not update an existing Place with non-proper data', (done) => {
-			const updates = { name: 4, radius: 'NaN' };
-			place.updatePlace(testPlace.id, updates)
+			const updates = { _id: testPlace.id, name: 4, radius: 'NaN' };
+			place.updatePlace(updates)
 				.catch((err) => {
 					done();
 				});

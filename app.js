@@ -1,6 +1,5 @@
 /* App entry point */
 const express = require('express');
-const cors = require('cors');
 const mongoose = require('mongoose');
 const dbConfig = require('./config/database');
 
@@ -21,7 +20,6 @@ const app = express();
 /* Setup the static file servering directory */
 app.use(express.static(__dirname + '/public'));
 
-app.use(cors());
 // Add a JSON-parser, as any incoming data should be json
 app.use(express.json({strict: false}));
 
@@ -36,26 +34,6 @@ app.use('/admin', adminApi);
 app.use('/admin/bundle', adminBundle);
 app.use('/admin/path', adminPath);
 app.use('/admin/place', adminPlace);
-
-/*
- * Setup index page
- * Right now, 'empty' page
- */
-app.get('/', (req, res) => {
-	res.send("There's nothing here yet!");
-});
-
-app.put('/', (req, res) => {
-	res.send("There's nothing here yet!");
-});
-
-app.delete('/', (req, res) => {
-	res.send("There's nothing here yet!");
-});
-
-app.post('/', (req, res) => {
-	res.send("There's nothing here yet!");
-});
 
 /*
  * Setup mongoose and start server if everything went well

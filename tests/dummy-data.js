@@ -1,11 +1,11 @@
 /*
-	This file is used to do manual testing with the controllers.
-	It fills the test-db with a bundle consisting of a path, consisting
-	of a few places. It's the same data as in the API-example
+This file is used to do manual testing with the controllers.
+It fills the test-db with a bundle consisting of a path, consisting
+of a few places. It's the same data as in the API-example
 
-	This is in no-way safe from errors - there will be key collisions for example
-	and it makes use of timeouts to get around mongoose being async. But its ONLY
-	purpose is to save time when manually testing.
+This is in no-way safe from errors - there will be key collisions for example
+and it makes use of timeouts to get around mongoose being async. But its ONLY
+purpose is to save time when manually testing.
 */
 process.env.NODE_ENV = 'test';
 
@@ -127,16 +127,16 @@ function addAll() {
 	setTimeout(() => {
 		console.log("Adding paths");
 		addPaths();
-	}, 500);
+	}, 10000);
 
 	setTimeout(() => {
 		console.log("Adding bundles");
 		addBundles();
-	}, 1000);
+	}, 20000);
 
 	setTimeout(() => {
 		mongoose.disconnect();
-	}, 1500);
+	}, 30000);
 }
 
 addAll();
