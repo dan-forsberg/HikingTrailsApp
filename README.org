@@ -18,9 +18,17 @@ it as a argument.
 npm start 80
 #+END_SRC
 * The stack design
-This project uses a MEAN stack. For the database it uses MongoDB, Node with Express for HTTP, and Angular for the front-end.
+This project uses a MEAN stack. For the database it uses MongoDB, Node with
+Express for HTTP, and Angular for the front-end.
 
-I had considered using other solutions, like a more "traditional" LAMP-stack. But I quickly decided on MEAN. The whole stack uses the same language, JavaScript, or a superset of it. The stack's components has more-or-less been built with a nice object-oriented and stable easy-to-use and easy-to-understand style. None of the stack's components are new, so I can safely assume that I won't run into any bugs or features which are lacking. The whole application is based on data, which is something Node excels at and Angular is made for. This strengthen my decision for Node and Angular.
+I had considered using other solutions, like a more "traditional" LAMP-stack.
+But I quickly decided on MEAN. The whole stack uses the same language,
+JavaScript, or a superset of it. The stack's components has more-or-less been
+built with a nice object-oriented and stable easy-to-use and easy-to-understand
+style. None of the stack's components are new, so I can safely assume that I
+won't run into any bugs or features which are lacking. The whole application is
+based on data, which is something Node excels at and Angular is made for. This
+strengthen my decision for Node and Angular.
 
 ** The back-end/API implementation
 *** Requirements
@@ -35,29 +43,31 @@ The API will be exposed at ~/api~ which will be for regular users to GET data.
 
 | Operation | endpoint | parameters              | Example            |
 |-----------+----------+-------------------------+--------------------|
-| GET       | /api     | [path/id] or [place/id] | GET \/api\/path\/2 |
+| GET       | /api     | [path/id] or [place/id] | GET /api/path/2 |
 | POST      | /api     | none                    | Not supported.     |
 | PUT       | /api     | none                    | Not supported.     |
 | DELETE    | /api     | none                    | Not supported.     |
 
 The admin API will be exposed at ~/api/admin~ for admins to GET, POST, PUT, or DELETE data.
 
-| Operation | endpoint   | parameters                                 | Returns                  | Example                                             |
-|-----------+------------+--------------------------------------------+--------------------------+-----------------------------------------------------|
-| GET       | /api/admin | none                                       | error                    |                                                     |
-| POST      | /api/admin | { 'newPath': {'name': '...'}}              | The new object           | POST \/api\/admin\/place, { name: 'Place..', ... }  |
-| PUT       | /api/admin | [path:id] and updated parameters in object | The updated object       | PUT \/api\/admin\/path\/5, { name: 'Updated name' } |
-| DELETE    | /api/admin | none                                       | { succeeded: true/false} | DELETE \/api\/admin\/bundle\/3                      |
+| Operation | endpoint   | parameters                                   | Returns                  | Example                                         |
+|-----------+------------+----------------------------------------------+--------------------------+-------------------------------------------------|
+| GET       | /api/admin | none                                         | error                    |                                                 |
+| POST      | /api/admin | { 'newPath': {'name': '...'}}                | The new object           | POST /api/admin/place, { name: 'Place..', ... } |
+| PUT       | /api/admin | The object to update, either partial or full | The updated object       | PUT /api/admin/path, { name: 'Updated name' }   |
+| DELETE    | /api/admin | none                                         | { succeeded: true/false} | DELETE /api/admin/bundle/3                      |
 
 The admin API takes incoming requests with ~application/json~ and any data should be JSON.
 
 To create a bundle/path/place POST to ~/api/admin/[bundle,path,place]~ with required parameters.
-To update a bundle/path/place PUT to ~/api/admin/[bundle,path,place]/id~ with updated parameters.
+To update a bundle/path/place PUT to ~/api/admin/[bundle,path,place]~ with updated parameters.
 To delete a bundle/path/place DELETE to ~/api/admin/[bundle,path,place]/id~.
 
 **** Response
-If any operation fails, something like ~{ success: false, message: 'Operation x failed.' }~ will be sent along with error-code 500/internal error.
-If the operation succeeds then the data will be returned along with code 200/OK. In case a request element is not found, an empty set is returned.
+If any operation fails, something like ~{ success: false, message: 'Operation x
+failed.' }~ will be sent along with error-code 500/internal error. If the
+operation succeeds then the data will be returned along with code 200/OK. In
+case a request element is not found, an empty set is returned.
 
 **** Bundle
 
@@ -91,12 +101,21 @@ If the operation succeeds then the data will be returned along with code 200/OK.
 | media ~(array)~                  | Array of additional media objects. |
 
 *** Internal API design
-The whole API will follow an MVC-pattern. The model will handle any communication to the database, and do some rudamentary error-checking. It will not make use of callbacks to Mongoose, but return promises. This is to be able to ensure that things are done in correct order.
+The whole API will follow an MVC-pattern. The model will handle any
+communication to the database, and do some rudamentary error-checking. It will
+not make use of callbacks to Mongoose, but return promises. This is to be able
+to ensure that things are done in correct order.
 
-The controller will take JSON data in case of CrUD and send it to the model, if in production the controller will give a non-descriptive 'An error occured' message to the view. If in testing, it will give the whole error.
+The controller will take JSON data in case of CrUD and send it to the model, if
+in production the controller will give a non-descriptive 'An error occured'
+message to the view. If in testing, it will give the whole error.
 
 *** Testing
-For the models I have written unit tests - for the controllers I have decided to manually test them to save some time as it took some time to get the first tests to actually work. Testing manually also gives me some flexability and allows me to discover small errors earlier on. These manual tests have mostly been done with Postman.
+For the models I have written unit tests - for the controllers I have decided to
+manually test them to save some time as it took some time to get the first tests
+to actually work. Testing manually also gives me some flexability and allows me
+to discover small errors earlier on. These manual tests have mostly been done
+with Postman.
 
 The tests for the models test each operation in CRUD. It makes sure you
 - can create a proper element (all required fields are included)
@@ -114,15 +133,77 @@ The tests for the models test each operation in CRUD. It makes sure you
 - can delete an element
 - cannot delete an element which does not exist
 
-* Dependecies
-The app uses express for the actual HTTP server to make handling requests, parsing requests, and routing simpler.
-Express is also a well-known and well-tested library.
 
-The app also uses the Express middleware CORS to enable cross-origin requests.
+* What can be improved
+** Better UX
+The project right now is not completely complete. There's functionality that
+could be hooked on to make it more complete -- such as the ~EventEmitter~s for
+adding and deleting paths and places. Right now nothing hooks into them, but you
+could easily hook into them to give the user some better response. I have done
+this with Bundle, just to show that it's possible.
 
-The app uses Mongoose the library to communicate with MongoDB. This decision was made because mongoose is also well-known and well-tested. It also very conveniently abstracts everything for easy and fast development.
+IDs for creating paths and places is not showing, making it hard to actually
+create bundles. This is just because I never decided on a UI, and felt it would
+have delayed the project when I got the API <-> frontend working like I wanted
+to.
 
-** Dev dependecies
+** Testing
+The project lacks tests, but this is because I felt that I spent too much time
+on writing the tests for controller back-end and adding tests for everything
+would take too much time. Instead I opted for manual testing, knowing that it's
+not as fail-safe.
+
+** Error handling
+The error handling is not perfect -- especially on the front-end. The reason for
+this being that I never decided on a way to do error-handling. However there is
+code in place that one could hook into (e.g. failure to delete give you a ~{
+succeeded: false}~)
+
+** MongoDB design
+There is some issues with paths and bundles IDs, because the API spec said there
+were to be Numbers. This is probably just me reading into it too close. The
+server randomly generates IDs, but doesn't check if it collides (because of the
+extreme low probability).
+
+Paths and Bundle doesn't use ~ref~erences to the other documents, just simple IDs.
+This could easily be changed and using ~populate~ before sending off the data
+you could get a nicer design. I decided not to do this when working with the
+database part of the project because I was unsure how to handle errors if the
+referred path/place didn't exist.
+
+Had MongoDB been more of a relational DB generating ~path.polyline~ could have
+been done pretty nicely when querying the DB. I quickly checked on the
+possibility of doing this, but decided that I'll just do it on the back-end.
+** Map
+The map does not show a polygon as the spec says it should. I tried making it
+work, as well with circle markers, but the documentation for AGM was lacking and
+I couldn't get it working. I decided to leave them as markers, knowing this is
+not what the spec says.
+
+** Misc
+There is no authentication for the API, or GUI. This was left out because it
+could easily have increased the time needed for the project by too much. However
+as I mention in the API code, adding some auth-functionality with sessions
+could be done. I would've probably used [[https://github.com/kelektiv/node.bcrypt.js][node.bcrypt.js]] to hash passwords, and
+probably stored them in a MongoDB document.
+
+The back-end, when getting polyline, makes multiple queries. This works fine
+when having the DB and server on the same local machine, but having the DB
+remote makes this slow. I did it this way because I'm more used to MySQL/MariaDB
+and didn't know the syntax at first. Then I simply forgot to fix it.
+* Dependencies
+The app uses express for the actual HTTP server to make handling requests,
+parsing requests, and routing simpler. Express is also a well-known and
+well-tested library.
+
+For mapping the app uses the AGM, Angular Google Maps, library. This was a
+maintained and popular library, so I decided to use it for this project.
+
+The app uses Mongoose the library to communicate with MongoDB. This decision was
+made because mongoose is also well-known and well-tested. It also very
+conveniently abstracts everything for easy and fast development.
+
+** Dev dependencies
 The testing network used is Mocha with chai and its middleware chai-http.
 
 The rest of the dev-deps are just to enforce proper code style rules for nice readable code.
