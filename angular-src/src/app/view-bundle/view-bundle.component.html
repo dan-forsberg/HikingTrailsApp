@@ -5,6 +5,7 @@
 </div>
 
 <div class="more-bundle-info" *ngIf="showMoreInfo">
+  <h3>Bundle {{selectedBundle.name}}</h3>
     <div class="path" *ngFor="let path of selectedBundle.paths">
       <app-view-path [path_id]="path"></app-view-path>
     </div>

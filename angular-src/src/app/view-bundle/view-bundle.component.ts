@@ -31,6 +31,7 @@ export class ViewBundleComponent implements OnInit {
     this.bundles = this.bundles.filter(bun =>
       bun !== bundle
     );
+    this.showMoreInfo = false;
   }
 
   toggleAddBundle() {

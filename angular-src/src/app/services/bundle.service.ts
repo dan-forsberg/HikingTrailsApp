@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Bundle } from '../models/Bundle';
+import { ServResp } from '../models/ServResp';
 import { Observable } from 'rxjs';
 
 import { tap } from 'rxjs/operators';
@@ -24,7 +25,7 @@ export class BundleService {
   }
 
   deleteBundle(bundle: Bundle) {
-    return this.http.delete<Bundle>(`${this.server}/admin/bundle/${bundle._id}`,
+    return this.http.delete<ServResp>(`${this.server}/admin/bundle/${bundle._id}`,
      { headers: this.headers })
      .pipe(
        tap(_ => console.log(`Deleted bundle ${bundle.name}`))

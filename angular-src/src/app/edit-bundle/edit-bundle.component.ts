@@ -10,6 +10,7 @@ import { BundleService } from '../services/bundle.service';
 export class EditBundleComponent implements OnInit {
   @Input() bundle: Bundle;
   @Output() delBundle: EventEmitter<Bundle> = new EventEmitter<Bundle>();
+  deleted = false;
 
   constructor(private bundleServ: BundleService) { }
 
@@ -26,7 +27,15 @@ export class EditBundleComponent implements OnInit {
 
   deleteBundle() {
     this.bundleServ.deleteBundle(this.bundle).subscribe(
-      resp => this.delBundle.emit(resp)
+      (resp) => {
+        /* */
+        if (resp.succeeded) {
+          this.delBundle.emit(this.bundle);
+          this.deleted = true;
+        } else {
+          console.log('Unable to delete bundle');
+        }
+    }
     );
   }
 

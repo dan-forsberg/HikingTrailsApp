@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="!deleted">
   <h2>Editing #{{bundle._id}}</h2>
   <label>Name:
     <input required [(ngModel)]="bundle.name"/>
