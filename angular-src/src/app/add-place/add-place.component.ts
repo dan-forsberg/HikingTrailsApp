@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Place } from '../models/Place';
 import { PlaceService } from '../services/place.service';
 
@@ -14,7 +14,6 @@ export class AddPlaceComponent implements OnInit {
     radius: 25,
     position: {lng: 0, lat: 0},
   };
-  @Output() addPlace: EventEmitter<Place> = new EventEmitter<Place>();
 
   constructor(private placeServ: PlaceService) { }
 
@@ -27,7 +26,7 @@ export class AddPlaceComponent implements OnInit {
         /* success */
         if (resp.name === this.newPlace.name) {
           console.log('Place creation successful!');
-          this.addPlace.emit(resp);
+          this.placeServ.onAddPlace(resp);
         }
       }
     );

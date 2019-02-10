@@ -17,8 +17,6 @@ export class AddPathComponent implements OnInit {
     places: [],
   };
 
-  @Output() addPath: EventEmitter<Path> = new EventEmitter<Path>();
-
   constructor(private pathServ: PathService) { }
 
   ngOnInit() {
@@ -30,7 +28,7 @@ export class AddPathComponent implements OnInit {
         /* success */
         if (resp.name === this.newPath.name) {
           console.log('Place creation successful!');
-          this.addPath.emit(resp);
+          this.pathServ.onAddPath(resp);
         }
       }
     );

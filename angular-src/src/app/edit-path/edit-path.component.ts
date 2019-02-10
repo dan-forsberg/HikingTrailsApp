@@ -25,7 +25,7 @@ export class EditPathComponent implements OnInit {
   deletePath() {
     /* TODO: add EE */
     this.pathServ.deletePath(this.path).subscribe(
-      resp => console.log(resp)
+      resp => this.pathServ.onDelPath(this.path)
     );
   }
 }

@@ -1,10 +1,12 @@
 <h2>HikingTrails - Bundles</h2>
-<div class="bundle" *ngFor="let bundle of bundles" (click)="toggleMoreInfo(bundle)">
-  <h3>{{bundle.name}}</h3>
-  <p>{{bundle.info}}</p>
+<div class="col-md-6 bundles">
+  <div class="bundle" *ngFor="let bundle of bundles" (click)="toggleMoreInfo(bundle)">
+    <h3>{{bundle.name}}</h3>
+    <p>{{bundle.info}}</p>
+  </div>
 </div>
 
-<div class="more-bundle-info" *ngIf="showMoreInfo">
+<div class="col-md-6 bundle-more-info" *ngIf="showMoreInfo">
   <h3>Bundle {{selectedBundle.name}}</h3>
     <div class="path" *ngFor="let path of selectedBundle.paths">
       <app-view-path [path_id]="path"></app-view-path>
@@ -13,11 +15,3 @@
     <app-edit-bundle (delBundle)="onDelBundle($event)" *ngIf="showEditBundle"
     [bundle]="selectedBundle"></app-edit-bundle>
 </div>
-
-<button (click)="toggleAddBundle()">Add a bundle</button>
-<button (click)="toggleAddPath()">Add a path</button>
-<button (click)="toggleAddPlace()">Add a place</button>
-
-<app-add-bundle (addBundle)="onAddBundle($event)" *ngIf="showAddBundle"></app-add-bundle>
-<app-add-path *ngIf="showAddPath"></app-add-path>
-<app-add-place *ngIf="showAddPlace"></app-add-place>

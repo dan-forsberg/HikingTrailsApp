@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Path } from '../models/Path';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import { tap } from 'rxjs/operators';
 
@@ -14,12 +14,21 @@ export class PathService {
    * The URL of the API-server
    * (same as the static serving server in this case)
    */
-  private server = 'http://localhost:3000';//location.origin;
+  private server = 'http://localhost:3000'; // location.origin;
 
   /**
    * HTTP-headers for Content-Type: application/json
    */
   private headers: HttpHeaders;
+
+  /**
+   * Used to notify other components of added paths
+   */
+  public pathAdded$: Subject<Path>;
+  /**
+   * Used to notify other components of removed paths
+   */
+  public pathRemoved$: Subject<Path>;
 
   /**
    * Creates an instance of PathService.
@@ -29,6 +38,9 @@ export class PathService {
     /* HttpHeaders is immutable */
     const HEADERS = new HttpHeaders();
     this.headers = HEADERS.append('Content-Type', 'application/json');
+
+    this.pathAdded$ = new Subject();
+    this.pathRemoved$ = new Subject();
   }
 
   /**
@@ -80,5 +92,19 @@ export class PathService {
   addPath(path: Path): Observable<Path> {
     const body = JSON.stringify({newPath: path});
     return this.http.post<Path>(`${this.server}/admin/path/`, body, { headers: this.headers });
+  }
+
+  /**
+   * Used by app-add to notify other components that a new path has been added
+   */
+  onAddPath(path: Path) {
+    this.pathAdded$.next(path);
+  }
+
+  /**
+   * Used by app-del to notify other components that a path has been removed
+   */
+  onDelPath(path: Path) {
+    this.pathRemoved$.next(path);
   }
 }

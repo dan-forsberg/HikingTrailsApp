@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Bundle } from '../models/Bundle';
 import { ServResp } from '../models/ServResp';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import { tap } from 'rxjs/operators';
 
@@ -14,12 +14,21 @@ export class BundleService {
    * The URL of the API-server
    * (same as the static serving server in this case)
    */
-  private server = 'http://localhost:3000';//location.origin;
+  private server = 'http://localhost:3000'; // location.origin;
 
   /**
    * HTTP-headers for Content-Type: application/json
    */
   private headers: HttpHeaders;
+
+  /**
+   * Used to notify other components of added bundles
+   */
+  public bundleAdded$: Subject<Bundle>;
+  /**
+   * Used to notify other components of removed bundles
+   */
+  public bundleRemoved$: Subject<Bundle>;
 
   /**
    * Creates an instance of BundleService.
@@ -29,6 +38,9 @@ export class BundleService {
     /* HttpHeaders is immutable */
     const HEADERS = new HttpHeaders();
     this.headers = HEADERS.append('Content-Type', 'application/json');
+
+    this.bundleAdded$ = new Subject();
+    this.bundleRemoved$ = new Subject();
   }
 
   /**
@@ -46,7 +58,7 @@ export class BundleService {
     return this.http.delete<ServResp>(`${this.server}/admin/bundle/${bundle._id}`,
      { headers: this.headers })
      .pipe(
-       tap(_ => console.log(`Deleted bundle ${bundle.name}`))
+       tap(_ => console.log(`Deleted bundle ${bundle.name}`)),
      );
   }
 
@@ -72,5 +84,19 @@ export class BundleService {
   addBundle(bundle: Bundle): Observable<Bundle> {
     const body = JSON.stringify({newBundle: bundle});
     return this.http.post<Bundle>(`${this.server}/admin/bundle/`, body, { headers: this.headers });
+  }
+
+  /**
+   * Used by app-add to notify other components that a new bundle has been added
+   */
+  onAddBundle(bundle: Bundle) {
+    this.bundleAdded$.next(bundle);
+  }
+
+  /**
+   * Used by app-del to notify other components that a bundle has been removed
+   */
+  onDelBundle(bundle: Bundle) {
+    this.bundleRemoved$.next(bundle);
   }
 }

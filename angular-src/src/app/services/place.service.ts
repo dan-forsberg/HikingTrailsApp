@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Place } from '../models/Place';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import { tap } from 'rxjs/operators';
 
@@ -14,12 +14,21 @@ export class PlaceService {
    * The URL of the API-server
    * (same as the static serving server in this case)
    */
-  private server = 'http://localhost:3000';//location.origin;
+  private server = 'http://localhost:3000'; // location.origin;
 
   /**
    * HTTP-headers for Content-Type: application/json
    */
   private headers: HttpHeaders;
+
+  /**
+   * Used to notify other components of added places
+   */
+  public placeAdded$: Subject<Place>;
+  /**
+   * Used to notify other components of removed places
+   */
+  public placeRemoved$: Subject<Place>;
 
   /**
    * Creates an instance of PlaceService.
@@ -29,6 +38,9 @@ export class PlaceService {
     /* HttpHeaders is immutable */
     const HEADERS = new HttpHeaders();
     this.headers = HEADERS.append('Content-Type', 'application/json');
+
+    this.placeAdded$ = new Subject();
+    this.placeRemoved$ = new Subject();
   }
 
   /**
@@ -80,5 +92,19 @@ export class PlaceService {
     const body = JSON.stringify({newPlace: place});
     console.log(`Sending: ${body}`);
     return this.http.post<Place>(`${this.server}/admin/place/`, body, { headers: this.headers });
+  }
+
+  /**
+   * Used by app-add to notify other components that a new place has been added
+   */
+  onAddPlace(place: Place) {
+    this.placeAdded$.next(place);
+  }
+
+  /**
+   * Used by app-del to notify other components that a place has been removed
+   */
+  onDelPlace(place: Place) {
+    this.placeRemoved$.next(place);
   }
 }
