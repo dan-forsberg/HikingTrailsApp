@@ -1,14 +1,11 @@
 <title>{{title}}</title>
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      Hiking Trails Management
-    </div>
-  </div>
-  <button (click)="toggleAddBundle()">Add a bundle</button>
-  <button (click)="toggleAddPath()">Add a path</button>
-  <button (click)="toggleAddPlace()">Add a place</button>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <span class="navbar-brand mb-0 h1">Hiking Trails</span>
+  <button class="nav-item nav-link" (click)="toggleAddBundle()">Add a bundle</button>
+  <button class="nav-item nav-link" (click)="toggleAddPath()">Add a path</button>
+  <button class="nav-item nav-link" (click)="toggleAddPlace()">Add a place</button>
 </nav>
+
 <app-add-bundle *ngIf="showAddBundle"></app-add-bundle>
 <app-add-path *ngIf="showAddPath"></app-add-path>
 <app-add-place *ngIf="showAddPlace"></app-add-place>
