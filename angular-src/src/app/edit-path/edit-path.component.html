@@ -1,17 +1,21 @@
 <div>
   <h3>Editing #{{path._id}}</h3>
-  <label>Name:
+  <label>Name:</label>
     <input required [(ngModel)]="path.name"/>
-  </label><br/>
-  <label>Info:
+  <br/>
+
+  <label>Info:</label>
     <input required [(ngModel)]="path.info"/>
-  </label><br/>
-  <label>Paths:
+  <br/>
+
+  <label>Paths:</label>
     <input required [(ngModel)]="path.places"/>
-  </label><br/>
-  <label>Image:
+  <br/>
+
+  <label>Image:</label>
     <input [(ngModel)]="path.image"/>
-  </label><br/>
+  <br/>
+
   <button id="finish-edit" (click)="updatePath()">Submit</button>
   <button id="delete" (click)="deletePath()">DELETE</button>
 </div>

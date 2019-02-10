@@ -3,6 +3,7 @@
   <div class="bundle" *ngFor="let bundle of bundles" (click)="toggleMoreInfo(bundle)">
     <h3>{{bundle.name}}</h3>
     <p>{{bundle.info}}</p>
+    <img *ngIf="bundle.image" src="{{ bundle.image }}">
   </div>
 </div>
 

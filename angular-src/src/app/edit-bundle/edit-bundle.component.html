@@ -1,17 +1,19 @@
 <div *ngIf="!deleted">
   <h2>Editing #{{bundle._id}}</h2>
-  <label>Name:
+  <label>Name:</label>
     <input required [(ngModel)]="bundle.name"/>
-  </label><br/>
-  <label>Info:
+  <br/>
+
+  <label>Info:</label>
     <input required [(ngModel)]="bundle.info"/>
-  </label><br/>
-  <label>Paths:
+  <br/>
+  <label>Paths:</label>
     <input required [(ngModel)]="bundle.paths"/>
-  </label><br/>
-  <label>Image:
+  <br/>
+  <label>Image:</label>
     <input [(ngModel)]="bundle.image"/>
-  </label><br/>
+  <br/>
+
   <button id="finish-edit" (click)="updateBundle()">Submit</button>
   <button id="delete" (click)="deleteBundle()">DELETE</button>
 </div>
