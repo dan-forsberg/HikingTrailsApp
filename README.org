@@ -74,7 +74,8 @@ components can be informed of the change.
 
 The service needs to be informed because it does not complete the request
 itself. It doesn't complete the request itself to allow the controller to do
-error-handling and response-handling appropriately (bubble it up to the view, retry/fix, etc).
+error-handling and response-handling appropriately (bubble it up to the view,
+retry/fix, etc).
 
 Example snippet
 #+BEGIN_SRC javascript
@@ -216,7 +217,18 @@ on writing the tests for controller back-end and adding tests for everything
 would take too much time. Instead I opted for manual testing, knowing that it's
 not as fail-safe.
 
-** Error handling
+** Front-end design
+Had I designed this now this is not how I would've done it -- I would've
+completed the request in the service and exposed an observable any component can
+subscribe to. I went through with this design because I realised it too late. At
+first I chose to complete the request in the component to make use of the
+lazy-loading possibility and to not have to use ~async~ and ~await~. I had first
+thought to use ~EventEmitters~ to inform about updates/creations/deletions, but
+I then switched to ~Subjects~ which are much more appropriate (then any
+component can subscribe to the events, instead of the parent). I never changed
+the design after realising the "problems" because it would have potentially
+taken a lot of time.
+
 The error handling is not perfect -- especially on the front-end. The reason for
 this being that I never decided on a way to do error-handling. However there is
 code in place that one could hook into (e.g. failure to delete give you a ~{
