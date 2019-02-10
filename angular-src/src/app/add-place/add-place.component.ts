@@ -12,7 +12,7 @@ export class AddPlaceComponent implements OnInit {
     name: '',
     info: '',
     radius: 25,
-    position: {lng: 0, lat: 0, radius: 25},
+    position: {lng: 0, lat: 0},
   };
   @Output() addPlace: EventEmitter<Place> = new EventEmitter<Place>();
 
