@@ -1,7 +1,24 @@
+* Hiking Trails
+This app shows hiking trails and allows users to see where different trails go,
+plotted out on a map.
+
+**** Good to know
+Through-out this project I've written 'CrUD' or 'cRud' for example, this is just
+to show that the relevant code is just for creating, updating deleting, or
+reading, etc.
+
+I have not fully implemented everything the project can do, this is to save time
+or it wasn't appropriate for the UI. For example, when adding/deleting/updating
+a Bundle the page updates dynamically. This is however not true for path and
+place, the functionality is there, just not hooked up. (Subscribe to
+~placeServ.placeAdded$~ for example.)
+
 * Installation
 Angular is configured to build into directory ~../public~ which will be the same
 directory that Node is told to serve from. These instructions assume you have
 ~angular-cli~ and ~Node~ with ~NPM~ installed.
+
+The database is remotely hosted, so there is no need to setup MongoDB.
 
 #+BEGIN_SRC sh
 git clone [project]
@@ -30,7 +47,47 @@ won't run into any bugs or features which are lacking. The whole application is
 based on data, which is something Node excels at and Angular is made for. This
 strengthen my decision for Node and Angular.
 
+** The front-end implementation
+The front-end is built using Angular, with an MVC-approach. It makes use of
+Angular's ~service~ to communicate with the API back-end. These services are
+also used to communicate with each other to inform each other of updates (when
+successfully creating, deleting, or updating a Bundle for example).
+
+It makes use of separating things into different components, such as for adding
+and editing a bundle. This is then all wrapped up in the ~app component~. Each
+component viewer (~view-bundle~) also shows each component editor
+(~edit-bundle~) which also shows the delete functionality.
+
+*** Data flow between components and services
+When creating a Bundle, the ~add-bundle~ component communicates with the
+~bundle~ service. The service in question sets up a request to the API, and the
+component is response for completing it (callbacks). If a request completes
+successfully then the component is supposed to inform the service of it so other
+components can be informed of the change.
+
+The service needs to be informed because it does not complete the request
+itself. It doesn't complete the request itself to allow the controller to do
+error-handling and response-handling appropriately (bubble it up to the view, retry/fix, etc).
+
+Example snippet
+#+BEGIN_SRC javascript
+/* The adding component */
+pathService.addPath(newPath).subscribe(
+    serverResponse => {
+        if (resp.name === newPath.name) // simple success check
+             pathService.onAddPath(resp);
+    }
+);
+
+/* Any viewing components, depending on path */
+pathService.pathAdded$.subscribe({
+    next: path => onAddedPath(path) // do something with the added path
+});
+#+END_SRC
+
 ** The back-end/API implementation
+How I've thought about the project, how I've designed it and how I actually
+implemented it.
 *** Requirements
 - The API should be stateless and use the CRUD-design.
 - The back-end/API should work with the regular HTTP/verb requests.
@@ -133,7 +190,6 @@ The tests for the models test each operation in CRUD. It makes sure you
 - can delete an element
 - cannot delete an element which does not exist
 
-
 * What can be improved
 ** Better UX
 The project right now is not completely complete. There's functionality that
@@ -165,7 +221,7 @@ were to be Numbers. This is probably just me reading into it too close. The
 server randomly generates IDs, but doesn't check if it collides (because of the
 extreme low probability).
 
-Paths and Bundle doesn't use ~ref~erences to the other documents, just simple IDs.
+Paths and Bundle doesn't use '~ref~'erences to the other documents, just simple IDs.
 This could easily be changed and using ~populate~ before sending off the data
 you could get a nicer design. I decided not to do this when working with the
 database part of the project because I was unsure how to handle errors if the
