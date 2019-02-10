@@ -14,7 +14,7 @@ export class BundleService {
    * The URL of the API-server
    * (same as the static serving server in this case)
    */
-  private server = 'http://localhost:3000'; // location.origin;
+  private server = location.origin;
 
   /**
    * HTTP-headers for Content-Type: application/json

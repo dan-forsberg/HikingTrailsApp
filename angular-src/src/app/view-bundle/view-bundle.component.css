@@ -5,3 +5,15 @@
 .bundle-more-info {
   float: right;
 }
+
+.bundle {
+  margin-bottom: 50px;
+}
+
+.path {
+  margin-top: 40px;
+}
+
+button {
+  margin-top: 10px;
+}

@@ -1,22 +1,28 @@
 <div>
   <h3>Adding new Path</h3>
-  <label>Name:
+  <label>Name:</label>
     <input required [(ngModel)]="newPath.name"/>
-  </label><br/>
-  <label>Info:
+  <br/>
+
+  <label>Info:</label>
     <input required [(ngModel)]="newPath.info"/>
-  </label><br/>
-  <label>Length:
+  <br/>
+
+  <label>Length:</label>
     <input required [(ngModel)]="newPath.length"/>
-  </label><br/>
-  <label>Duration:
+  <br/>
+
+  <label>Duration:</label>
     <input required [(ngModel)]="newPath.duration"/>
-  </label><br/>
-  <label>Places:
+  <br/>
+
+  <label>Places:</label>
     <input required [(ngModel)]="newPath.places"/>
-  </label><br/>
-  <label>Image:
+  <br/>
+
+  <label>Image:</label>
     <input [(ngModel)]="newPath.image"/>
-  </label><br/>
+  <br/>
+
   <button (click)="submit()">Submit</button>
 </div>

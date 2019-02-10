@@ -7,12 +7,14 @@
 </div>
 
 <div class="col-md-6 bundle-more-info" *ngIf="showMoreInfo">
-  <h3>Bundle {{selectedBundle.name}}</h3>
+  <h2>Bundle {{selectedBundle.name}}</h2>
+  <p>{{selectedBundle.info}}</p>
+  <p>It covers {{selectedBundle.paths.length}} paths.</p>
     <!-- this throws an error when editing "trying to diff 1234..." only arrays and iterables are allowed -->
     <div class="path" *ngFor="let path of selectedBundle.paths">
       <app-view-path [path_id]="path"></app-view-path>
     </div>
     <button class="edit" (click)="toggleEdit()">Edit bundle</button>
     <app-edit-bundle (delBundle)="onDelBundle($event)" *ngIf="showEditBundle"
-    [bundle]="selectedBundle"></app-edit-bundle>
+      [bundle]="selectedBundle"></app-edit-bundle>
 </div>
