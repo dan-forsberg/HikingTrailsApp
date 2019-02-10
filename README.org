@@ -34,6 +34,13 @@ it as a argument.
 #+BEGIN_SRC sh
 npm start 80
 #+END_SRC
+
+To run the unit tests for the back-end controllers, just run
+#+BEGIN_SRC sh
+npm test
+#+END_SRC
+
+It'll be a bit slow, which mocha warns about, because of the remote database.
 * The stack design
 This project uses a MEAN stack. For the database it uses MongoDB, Node with
 Express for HTTP, and Angular for the front-end.
