@@ -25,6 +25,9 @@ export class ViewBundleComponent implements OnInit {
     this.bundleServ.bundleRemoved$.subscribe({
       next: bundle => this.onDelBundle(bundle)
     });
+    this.bundleServ.bundleEdited$.subscribe({
+      next: bundle => this.onEditBundle(bundle)
+    });
   }
 
   toggleEdit() {
@@ -40,6 +43,17 @@ export class ViewBundleComponent implements OnInit {
       bun !== bundle
     );
     this.showMoreInfo = false;
+  }
+
+  onEditBundle(bundle: Bundle) {
+    const index = this.bundles.findIndex(bun =>
+      bun._id === bundle._id
+    );
+
+    this.bundles[index] = bundle;
+    this.selectedBundle = bundle;
+
+    console.log('Swapped bundles');
   }
 
   toggleMoreInfo(bundle: Bundle) {

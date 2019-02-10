@@ -29,6 +29,10 @@ export class BundleService {
    * Used to notify other components of removed bundles
    */
   public bundleRemoved$: Subject<Bundle>;
+  /**
+   * Used to notify other components of removed bundles
+   */
+  public bundleEdited$: Subject<Bundle>;
 
   /**
    * Creates an instance of BundleService.
@@ -41,6 +45,7 @@ export class BundleService {
 
     this.bundleAdded$ = new Subject();
     this.bundleRemoved$ = new Subject();
+    this.bundleEdited$ = new Subject();
   }
 
   /**
@@ -98,5 +103,12 @@ export class BundleService {
    */
   onDelBundle(bundle: Bundle) {
     this.bundleRemoved$.next(bundle);
+  }
+
+  /**
+   * Used by app-edit to notify other components that a bundle has been updated
+   */
+  onEditBundle(bundle: Bundle) {
+    this.bundleEdited$.next(bundle);
   }
 }

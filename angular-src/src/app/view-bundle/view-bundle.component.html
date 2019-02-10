@@ -8,6 +8,7 @@
 
 <div class="col-md-6 bundle-more-info" *ngIf="showMoreInfo">
   <h3>Bundle {{selectedBundle.name}}</h3>
+    <!-- this throws an error when editing "trying to diff 1234..." only arrays and iterables are allowed -->
     <div class="path" *ngFor="let path of selectedBundle.paths">
       <app-view-path [path_id]="path"></app-view-path>
     </div>

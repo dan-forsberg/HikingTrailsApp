@@ -20,7 +20,7 @@ export class EditBundleComponent implements OnInit {
   updateBundle() {
     /* Could show something to the end-user to confirm changes */
     this.bundleServ.updateBundle(this.bundle).subscribe(
-      resp => console.log(resp)
+      resp => this.bundleServ.onEditBundle(resp)
     );
   }
 
