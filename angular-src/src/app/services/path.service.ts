@@ -29,6 +29,11 @@ export class PathService {
    * Used to notify other components of removed paths
    */
   public pathRemoved$: Subject<Path>;
+  /**
+   * Used to notify other components of removed paths
+   */
+  public pathEdited$: Subject<Path>;
+
 
   /**
    * Creates an instance of PathService.
@@ -65,10 +70,7 @@ export class PathService {
    */
   deletePath(path: Path) {
     return this.http.delete<Path>(`${this.server}/admin/path/${path._id}`,
-     { headers: this.headers })
-     .pipe(
-       tap(_ => console.log(`Deleted path ${path.name}`))
-     );
+     { headers: this.headers });
   }
 
   /**
@@ -79,10 +81,7 @@ export class PathService {
   updatePath(path: Path) {
     const body = JSON.stringify({ path });
     return this.http.put<Path>(`${this.server}/admin/path/`, body,
-    { headers: this.headers })
-    .pipe(
-      tap(_ => console.log(`Updated path ${path.name}`))
-    );
+    { headers: this.headers });
   }
 
   /**
@@ -106,5 +105,12 @@ export class PathService {
    */
   onDelPath(path: Path) {
     this.pathRemoved$.next(path);
+  }
+
+  /**
+   * Used by app-del to notify other components that a path has been removed
+   */
+  onEditPath(path: Path) {
+    this.pathEdited$.next(path);
   }
 }

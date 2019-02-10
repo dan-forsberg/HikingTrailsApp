@@ -27,7 +27,6 @@ export class AddPathComponent implements OnInit {
       resp => {
         /* success */
         if (resp.name === this.newPath.name) {
-          console.log('Place creation successful!');
           this.pathServ.onAddPath(resp);
         }
       }

@@ -61,10 +61,7 @@ export class BundleService {
    */
   deleteBundle(bundle: Bundle) {
     return this.http.delete<ServResp>(`${this.server}/admin/bundle/${bundle._id}`,
-     { headers: this.headers })
-     .pipe(
-       tap(_ => console.log(`Deleted bundle ${bundle.name}`)),
-     );
+     { headers: this.headers });
   }
 
 
@@ -76,10 +73,7 @@ export class BundleService {
   updateBundle(bundle: Bundle) {
     const body = JSON.stringify({ bundle });
     return this.http.put<Bundle>(`${this.server}/admin/bundle/`, body,
-    { headers: this.headers })
-    .pipe(
-      tap(_ => console.log(`Updated bundle ${bundle.name}`))
-    );
+    { headers: this.headers });
   }
 
   /**

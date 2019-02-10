@@ -18,7 +18,7 @@ export class EditPathComponent implements OnInit {
   updatePath() {
     /* TODO: add EE */
     this.pathServ.updatePath(this.path).subscribe(
-      resp => console.log(resp)
+      resp => this.pathServ.onEditPath(resp)
     );
   }
 

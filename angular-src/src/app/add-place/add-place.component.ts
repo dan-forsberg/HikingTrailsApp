@@ -25,7 +25,6 @@ export class AddPlaceComponent implements OnInit {
       resp => {
         /* success */
         if (resp.name === this.newPlace.name) {
-          console.log('Place creation successful!');
           this.placeServ.onAddPlace(resp);
         }
       }

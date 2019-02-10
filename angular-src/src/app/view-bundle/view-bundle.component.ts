@@ -52,8 +52,6 @@ export class ViewBundleComponent implements OnInit {
 
     this.bundles[index] = bundle;
     this.selectedBundle = bundle;
-
-    console.log('Swapped bundles');
   }
 
   toggleMoreInfo(bundle: Bundle) {

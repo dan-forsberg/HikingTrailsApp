@@ -29,6 +29,10 @@ export class PlaceService {
    * Used to notify other components of removed places
    */
   public placeRemoved$: Subject<Place>;
+  /**
+   * Used to notify other components of removed places
+   */
+  public placeEdited$: Subject<Place>;
 
   /**
    * Creates an instance of PlaceService.
@@ -41,6 +45,7 @@ export class PlaceService {
 
     this.placeAdded$ = new Subject();
     this.placeRemoved$ = new Subject();
+    this.placeEdited$ = new Subject();
   }
 
   /**
@@ -64,10 +69,7 @@ export class PlaceService {
    */
   deletePlace(place: Place) {
     return this.http.delete<Place>(`${this.server}/admin/place/${place._id}`,
-     { headers: this.headers })
-     .pipe(
-       tap(_ => console.log(`Deleted place ${place.name}`))
-     );
+     { headers: this.headers });
   }
 
   /**
@@ -78,10 +80,7 @@ export class PlaceService {
   updatePlace(place: Place) {
     const body = JSON.stringify({ place });
     return this.http.put<Place>(`${this.server}/admin/place/`, body,
-    { headers: this.headers })
-    .pipe(
-      tap(_ => console.log(`Updated place ${place.name}`))
-    );
+    { headers: this.headers });
   }
 
   /**
@@ -90,7 +89,6 @@ export class PlaceService {
    */
   addPlace(place: Place): Observable<Place> {
     const body = JSON.stringify({newPlace: place});
-    console.log(`Sending: ${body}`);
     return this.http.post<Place>(`${this.server}/admin/place/`, body, { headers: this.headers });
   }
 
@@ -106,5 +104,12 @@ export class PlaceService {
    */
   onDelPlace(place: Place) {
     this.placeRemoved$.next(place);
+  }
+
+  /**
+   * Used by app-del to notify other components that a place has been removed
+   */
+  onEditPlace(place: Place) {
+    this.placeEdited$.next(place);
   }
 }

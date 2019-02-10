@@ -23,7 +23,7 @@ export class EditPlaceComponent implements OnInit {
     }
 
     this.placeServ.updatePlace(this.place).subscribe(
-      resp => console.log(resp)
+      resp => this.placeServ.onEditPlace(resp)
     );
   }
 
