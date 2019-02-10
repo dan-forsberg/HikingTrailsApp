@@ -259,6 +259,8 @@ The app uses Mongoose the library to communicate with MongoDB. This decision was
 made because mongoose is also well-known and well-tested. It also very
 conveniently abstracts everything for easy and fast development.
 
+For the UI it uses a bit of bootstrap to make things a little nicer.
+
 ** Dev dependencies
 The testing network used is Mocha with chai and its middleware chai-http.
 
