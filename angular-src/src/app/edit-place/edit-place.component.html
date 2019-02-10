@@ -18,7 +18,7 @@
   <label>Image:
     <input [(ngModel)]="place.image"/>
   </label><br/>
-  <div class="add-media">
+  <div class="add-media" *ngIf="media">
     <label>Media type:
       <input [(ngModel)]="media.type"/>
     </label><br />

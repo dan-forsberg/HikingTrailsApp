@@ -12,6 +12,7 @@ export class ViewBundleComponent implements OnInit {
   selectedBundle: Bundle = null;
   showMoreInfo = false;
   @Input() addBundle: Bundle;
+  showEditBundle = false;
 
   constructor(private bundleServ: BundleService) { }
 
@@ -24,6 +25,10 @@ export class ViewBundleComponent implements OnInit {
     this.bundleServ.bundleRemoved$.subscribe({
       next: bundle => this.onDelBundle(bundle)
     });
+  }
+
+  toggleEdit() {
+    this.showEditBundle = !this.showEditBundle;
   }
 
   onAddBundle(bundle: Bundle) {

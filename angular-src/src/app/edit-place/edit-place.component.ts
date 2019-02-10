@@ -18,8 +18,10 @@ export class EditPlaceComponent implements OnInit {
   }
 
   updatePlace() {
-    /* TODO: add EE */
-    this.place.media.push(this.media);
+    if (this.media) {
+      this.place.media.push(this.media);
+    }
+
     this.placeServ.updatePlace(this.place).subscribe(
       resp => console.log(resp)
     );
