@@ -12,8 +12,6 @@ export class ViewPolylineComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log("positions[0] = ");
-    console.log(this.positions[0].positions.lat);
   }
 
 }
