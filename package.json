@@ -4,10 +4,11 @@
   "description": "Full stack developer test",
   "main": "app.js",
   "scripts": {
-	"test": "mocha tests/*.specs.js --exit",
-	"start": "node app.js"
+    "test": "mocha tests/*.specs.js --exit",
+    "start": "node app.js"
   },
   "dependencies": {
+    "bootstrap": "^4.2.1",
     "cors": "~2.8.5",
     "express": "~4.16.4",
     "mongoose": "~5.4.8"
