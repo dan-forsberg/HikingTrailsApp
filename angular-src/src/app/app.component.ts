@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Output, Input, EventEmitter } from '@angular/core';
+import { Bundle } from './models/Bundle';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,25 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Hiking Trails';
+  showEditBundle = false;
+
+  showAddBundle = false;
+  showAddPath = false;
+  showAddPlace = false;
+
+  toggleAddBundle() {
+    this.showAddBundle = !this.showAddBundle;
+  }
+
+  toggleAddPath() {
+    this.showAddPath = !this.showAddPath;
+  }
+
+  toggleAddPlace() {
+    this.showAddPlace = !this.showAddPlace;
+  }
+
+  toggleEdit() {
+    this.showEditBundle = !this.showEditBundle;
+  }
 }
