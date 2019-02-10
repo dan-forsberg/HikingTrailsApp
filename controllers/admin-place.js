@@ -4,7 +4,6 @@ Page: admin/place
 Here any requests of creating, updating, or deleting of Places should come
 */
 
-
 const express = require('express');
 const router = express.Router();
 const place = require('../models/place');
@@ -39,10 +38,8 @@ router.post('/', (req, res) => {
 		res.send({succeeded: false, msg: errs});
 
 	const newPlace = new place.Place(reqPlace);
-	console.log("Adding place");
 	place.addPlace(newPlace).then((pl) => {
 		res.send(pl)
-		console.log("Added");
 	})
 	.catch((err) => {
 		res.status(500);
